@@ -1,4 +1,4 @@
-from app.schemas.disease import (
+from schemas.disease import (
     PredictionResponse,
     TreatmentGuidance,
     SupportedCropsResponse,

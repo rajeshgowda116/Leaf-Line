@@ -49,8 +49,8 @@ Production-grade, modular plant disease detection backend service supporting 5 c
 ```powershell
 # From project root:
 .\env\Scripts\Activate.ps1
-cd Backend\Disease
-uvicorn app.main:app --reload --port 8000
+cd Backend
+uvicorn main:app --reload --port 8000
 ```
 
 ### 2. Open the Connected Web App
@@ -65,8 +65,8 @@ uvicorn app.main:app --reload --port 8000
 ## Running the Automated Test Suite
 
 ```powershell
-# From Backend/Disease:
-..\..\env\Scripts\python.exe -m pytest -v
+# From Backend directory:
+..\env\Scripts\python.exe -m pytest -v
 ```
 
 All 13 unit and integration tests validate health status, file validation (format, size limits, corrupted bytes), crop routes, and end-to-end leaf prediction schema.

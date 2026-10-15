@@ -1,15 +1,15 @@
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status
 from typing import Dict, Any
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status
 
-from app.schemas.disease import (
+from schemas.disease import (
     PredictionResponse,
     SupportedCropsResponse,
     CropClassesResponse,
     CropInfo,
 )
-from app.services.model_service import get_supported_crops, get_crop_classes
-from app.services.prediction_service import analyze_leaf_image
-from app.config import settings
+from services.model_service import get_supported_crops, get_crop_classes
+from services.prediction_service import analyze_leaf_image
+from config import settings
 
 router = APIRouter(prefix="/disease", tags=["Disease Detection"])
 

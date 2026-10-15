@@ -4,8 +4,8 @@ from PIL import Image
 import torch
 import numpy as np
 
-from app.services.treatment_service import normalize_crop_name
-from app.services.image_service import preprocess_for_model
+from services.treatment_service import normalize_crop_name
+from services.image_service import preprocess_for_model
 
 logger = logging.getLogger(__name__)
 

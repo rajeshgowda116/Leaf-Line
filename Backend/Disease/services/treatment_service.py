@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from typing import Optional, Dict, Any
 
-from app.schemas.disease import TreatmentGuidance
+from schemas.disease import TreatmentGuidance
 
 DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "treatment_guides.json"
 

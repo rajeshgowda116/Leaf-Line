@@ -1,15 +1,31 @@
+import sys
 from pathlib import Path
+
+# Ensure Backend directory is in sys.path
+BASE_DIR = Path(__file__).resolve().parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 
-from app.config import settings
-from app.api.routes import router as disease_router
+from config import settings
+from api.routes import router as disease_router
 
-# Path to Frountend templates
-FRONTEND_TEMPLATES_DIR = (
-    Path(__file__).resolve().parent.parent.parent.parent / "Frountend" / "templates"
-)
+
+def get_frontend_templates_dir() -> Path:
+    """Finds Frountend/templates across parent directories."""
+    current = Path(__file__).resolve()
+    for parent in current.parents:
+        for folder in ("Frountend", "Frontend"):
+            candidate = parent / folder / "templates"
+            if candidate.exists():
+                return candidate
+    return current.parent.parent / "Frountend" / "templates"
+
+
+FRONTEND_TEMPLATES_DIR = get_frontend_templates_dir()
 
 
 def create_application() -> FastAPI:
@@ -45,22 +61,27 @@ def create_application() -> FastAPI:
             "environment": settings.ENVIRONMENT,
         }
 
-    # Convenience routes to serve the Frontend templates directly
+    # Convenience routes to serve Frontend templates directly
     @application.get("/", tags=["Frontend"], summary="Serve Home Page")
     async def serve_home():
         home_path = FRONTEND_TEMPLATES_DIR / "home.html"
         if home_path.exists():
             return FileResponse(home_path, media_type="text/html")
-        return HTMLResponse("<h1>TreeTrack AI Disease Detection Backend is Running.</h1><p>Visit <a href='/docs'>/docs</a> for the API.</p>")
+        return HTMLResponse("<h1>TreeTrack AI Backend Running</h1><p><a href='/docs'>Swagger API Docs</a></p>")
 
     @application.get("/chat", tags=["Frontend"], summary="Serve Disease Chat Page")
     async def serve_chat():
-        chat_path = FRONTEND_TEMPLATES_DIR / "Chat.html.html"
-        if chat_path.exists():
-            return FileResponse(chat_path, media_type="text/html")
+        for filename in ("Chat.html", "Chat.html.html"):
+            chat_path = FRONTEND_TEMPLATES_DIR / filename
+            if chat_path.exists():
+                return FileResponse(chat_path, media_type="text/html")
         return HTMLResponse("<h1>Chat Template not found</h1>")
 
     return application
 
 
 app = create_application()
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

@@ -1,10 +1,10 @@
 from typing import Dict, Any
 from PIL import Image
 
-from app.schemas.disease import PredictionResponse, ClassScore
-from app.services.image_service import validate_and_open_image
-from app.services.model_service import predict_disease
-from app.services.treatment_service import get_treatment_guidance, normalize_crop_name
+from schemas.disease import PredictionResponse, ClassScore
+from services.image_service import validate_and_open_image
+from services.model_service import predict_disease
+from services.treatment_service import get_treatment_guidance, normalize_crop_name
 
 
 def analyze_leaf_image(

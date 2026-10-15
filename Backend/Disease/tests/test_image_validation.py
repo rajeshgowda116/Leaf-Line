@@ -3,8 +3,8 @@ import pytest
 from PIL import Image
 from fastapi.testclient import TestClient
 
-from app.main import app
-from app.services.image_service import validate_and_open_image, preprocess_for_model
+from main import app
+from services.image_service import validate_and_open_image, preprocess_for_model
 from fastapi import HTTPException
 
 client = TestClient(app)
