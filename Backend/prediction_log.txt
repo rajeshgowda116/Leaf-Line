@@ -1,0 +1,36 @@
+File: leaf.jpg, Plant: Peach, Status: Bacterial Spot, Confidence: 78.32%, Raw: Peach___Bacterial_spot
+File: leaf.jpg, Plant: Strawberry, Status: Leaf Scorch, Confidence: 100.00%, Raw: Strawberry___Leaf_scorch
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: scan1.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: scan1.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: scan1.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: scan1.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: scan1.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: scan1.jpg, Plant: Corn, Status: Healthy, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___healthy
+File: tomato_leaf.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: scan1.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: tomato_leaf.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: scan1.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: sample.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: ambiguous_leaf.jpg, Plant: Tomato, Status: Inconclusive, Tentative: Healthy, Confidence: 2.63%, Margin: 0.0000, Entropy: 1.0000, Inconclusive: True, Raw: Tomato___healthy
+File: sample.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: ambiguous_leaf.jpg, Plant: Tomato, Status: Inconclusive, Tentative: Healthy, Confidence: 2.63%, Margin: 0.0000, Entropy: 1.0000, Inconclusive: True, Raw: Tomato___healthy
+File: sample.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: tomato_leaf.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: scan1.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: ambiguous_leaf.jpg, Plant: Tomato, Status: Inconclusive, Tentative: Healthy, Confidence: 2.63%, Margin: 0.0000, Entropy: 1.0000, Inconclusive: True, Raw: Tomato___healthy
+File: sample.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: ambiguous_leaf.jpg, Plant: Tomato, Status: Inconclusive, Tentative: Healthy, Confidence: 2.63%, Margin: 0.0000, Entropy: 1.0000, Inconclusive: True, Raw: Tomato___healthy
+File: sample.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: tomato_leaf.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight
+File: scan1.jpg, Plant: Corn, Status: Northern Leaf Blight, Tentative: Northern Leaf Blight, Confidence: 100.00%, Margin: 1.0000, Entropy: 0.0000, Inconclusive: False, Raw: Corn___Northern_Leaf_Blight

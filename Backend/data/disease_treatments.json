@@ -1,0 +1,458 @@
+{
+  "Tomato___Early_blight": {
+    "raw_label": "Tomato___Early_blight",
+    "crop": "Tomato",
+    "disease": "Early Blight",
+    "is_healthy": false,
+    "overview": "Early blight is a fungal disease caused by Alternaria solani. It primarily affects older foliage, creating dark brown circular spots with concentric target-board rings.",
+    "symptoms": [
+      "Dark brown to black spots with concentric rings ('target board' pattern)",
+      "Yellowing of foliage surrounding the lesions",
+      "Lower leaves affected first, progressing upwards",
+      "Defoliation exposing fruit to sunscald"
+    ],
+    "non_chemical_management": [
+      "Prune and destroy infected lower leaves promptly",
+      "Apply organic straw mulch around plant base to prevent soil splash",
+      "Ensure proper plant spacing (60 x 45 cm) for canopy aeration",
+      "Use drip or furrow irrigation to keep foliage dry"
+    ],
+    "prevention": [
+      "Rotate crops away from solanaceous plants (potato, chilli, brinjal) for 2-3 years",
+      "Use certified disease-free seeds and vigorous seedlings",
+      "Clean and disinfect staking poles and pruning tools"
+    ],
+    "treatment": [
+      "Foliar spray of Mancozeb 75% WP @ 2.0 g/L at the first appearance of symptoms",
+      "Alternatively, Chlorothalonil 75% WP @ 2.0 g/L at 10-14 day intervals",
+      "For severe infections, Azoxystrobin 23% SC @ 1.0 ml/L or Difenoconazole 25% EC @ 0.5 ml/L"
+    ],
+    "active_ingredients": [
+      "Mancozeb 75 WP fungicide",
+      "Chlorothalonil fungicide",
+      "Azoxystrobin 23 SC"
+    ],
+    "safety_precautions": [
+      "Wear protective gloves, eye protection, and mask during chemical application",
+      "Observe a mandatory Pre-Harvest Interval (PHI) of 7-10 days before harvesting fruit",
+      "Avoid spraying during windy conditions or midday peak heat"
+    ],
+    "source_references": [
+      "ICAR-IIHR (Indian Institute of Horticultural Research) - Tomato Disease Guide (https://iihr.res.in)",
+      "TNAU Agritech Portal (Horticulture - Tomato Diseases) (https://agritech.tnau.ac.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Tomato___Late_blight": {
+    "raw_label": "Tomato___Late_blight",
+    "crop": "Tomato",
+    "disease": "Late Blight",
+    "is_healthy": false,
+    "overview": "Late blight is a fast-spreading oomycete disease caused by Phytophthora infestans. It develops rapidly in cool, wet weather and can destroy foliage and fruits within days.",
+    "symptoms": [
+      "Water-soaked, dark olive to brown irregular lesions on leaves and stems",
+      "White fungal downy growth on the underside of leaves in high humidity",
+      "Rapid wilting and collapse of leaves appearing frost-damaged",
+      "Greasy, dark brown firm rot on green and ripe tomato fruits"
+    ],
+    "non_chemical_management": [
+      "Immediately prune and bury heavily infected shoots outside the field",
+      "Stake tomato vines and avoid dense canopy shading",
+      "Eliminate volunteer tomato plants and potato cull piles nearby"
+    ],
+    "prevention": [
+      "Plant resistant or tolerant tomato varieties where available",
+      "Avoid overhead sprinkler irrigation",
+      "Ensure rapid field drainage during heavy rains"
+    ],
+    "treatment": [
+      "Preventive spray: Mancozeb 75% WP @ 2.5 g/L or Copper Oxychloride 50% WP @ 3.0 g/L",
+      "Curative spray on disease onset: Metalaxyl 8% + Mancozeb 64% WP @ 2.0-2.5 g/L",
+      "Alternative systemic: Cymoxanil 8% + Mancozeb 64% WP @ 2.0 g/L"
+    ],
+    "active_ingredients": [
+      "Metalaxyl Mancozeb fungicide",
+      "Copper Oxychloride 50 WP",
+      "Mancozeb 75 WP fungicide"
+    ],
+    "safety_precautions": [
+      "Follow manufacturer label recommendations strictly",
+      "Maintain a 7-day pre-harvest waiting interval",
+      "Do not contaminate natural water bodies or livestock feed"
+    ],
+    "source_references": [
+      "ICAR-IIVR (Indian Institute of Vegetable Research) (https://iivr.icar.gov.in)",
+      "TNAU Agritech Portal - Late Blight Management (https://agritech.tnau.ac.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Tomato___Bacterial_spot": {
+    "raw_label": "Tomato___Bacterial_spot",
+    "crop": "Tomato",
+    "disease": "Bacterial Spot",
+    "is_healthy": false,
+    "overview": "Bacterial spot is caused by Xanthomonas campestris pv. vesicatoria. It produces small, water-soaked dark spots on foliage and scab-like lesions on fruit, favored by warm, humid rains.",
+    "symptoms": [
+      "Small, angular, water-soaked dark spots on foliage",
+      "Lesions turn brown to black with narrow yellow halos",
+      "Shot-hole appearance as dried centers fall out",
+      "Rough, elevated scabby spots on tomato fruits"
+    ],
+    "non_chemical_management": [
+      "Avoid handling or working among tomato vines when leaves are wet",
+      "Remove severely diseased lower leaves and destroy them safely",
+      "Apply biocontrol Pseudomonas fluorescens @ 5 g/L as protective spray"
+    ],
+    "prevention": [
+      "Use certified disease-free, hot-water treated seeds (50°C for 25 minutes)",
+      "Practice 2-year crop rotation with non-solanaceous crops",
+      "Disinfect nursery trays and field equipment"
+    ],
+    "treatment": [
+      "Foliar spray with Copper Oxychloride 50% WP @ 2.5 g/L mixed with Streptocycline @ 0.1 g/L (100 ppm)",
+      "Apply 2-3 sprays at 10-15 day intervals during rainy spells"
+    ],
+    "active_ingredients": [
+      "Copper Oxychloride 50 WP",
+      "Streptocycline bactericide"
+    ],
+    "safety_precautions": [
+      "Wear protective gear during handling of bactericide/copper mixtures",
+      "Observe recommended pre-harvest interval"
+    ],
+    "source_references": [
+      "ICAR-IIHR Tomato Pathology Compendium (https://iihr.res.in)",
+      "TNAU Plant Pathology Advisory (https://agritech.tnau.ac.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Tomato___Septoria_leaf_spot": {
+    "raw_label": "Tomato___Septoria_leaf_spot",
+    "crop": "Tomato",
+    "disease": "Septoria Leaf Spot",
+    "is_healthy": false,
+    "overview": "Caused by Septoria lycopersici, this fungal disease causes numerous small circular leaf spots with dark margins and gray centers, progressing from lower to upper canopy.",
+    "symptoms": [
+      "Numerous small (2-3 mm) circular spots with dark brown margins and gray centers",
+      "Tiny black specks (pycnidia) visible inside mature spot centers",
+      "Yellowing of leaf tissue surrounding multiple spots",
+      "Severe defoliation starting from oldest lower leaves"
+    ],
+    "non_chemical_management": [
+      "Pinch off lower leaves showing early spots and discard",
+      "Mulch soil to prevent soil-borne spore splash onto foliage",
+      "Avoid overhead watering and water at base of stems"
+    ],
+    "prevention": [
+      "2-3 year crop rotation away from tomatoes and weeds in the nightshade family",
+      "Ensure wide plant spacing for rapid canopy drying after rain",
+      "Deep autumn/summer plowing to bury crop residues"
+    ],
+    "treatment": [
+      "Foliar spray of Chlorothalonil 75% WP @ 2.0 g/L or Mancozeb 75% WP @ 2.0 g/L",
+      "Repeat application every 7-10 days under wet, warm conditions"
+    ],
+    "active_ingredients": [
+      "Chlorothalonil fungicide",
+      "Mancozeb 75 WP fungicide"
+    ],
+    "safety_precautions": [
+      "Wear protective mask and gloves; follow 7-day harvest interval"
+    ],
+    "source_references": [
+      "ICAR-IIVR Solanaceous Crop Protection Guide (https://iivr.icar.gov.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Tomato___healthy": {
+    "raw_label": "Tomato___healthy",
+    "crop": "Tomato",
+    "disease": "Healthy Plant",
+    "is_healthy": true,
+    "overview": "The tomato foliage appears vigorous, uniform green, and shows no significant pathological lesions, blights, or curling.",
+    "symptoms": [
+      "Uniform vibrant green leaves without chlorotic yellowing or necrosis",
+      "Intact leaf margins and healthy turgor pressure",
+      "No fungal sporulation, powdery coating, or bacterial ooze"
+    ],
+    "non_chemical_management": [
+      "Maintain consistent soil moisture without waterlogging",
+      "Apply organic compost or well-rotted farmyard manure (FYM)",
+      "Scout foliage weekly for early signs of pests or nutritional imbalance"
+    ],
+    "prevention": [
+      "Continue balanced fertilization according to crop development stage",
+      "Maintain clean field borders and weed management",
+      "Support beneficial insects and natural pollinators"
+    ],
+    "treatment": [],
+    "active_ingredients": [],
+    "safety_precautions": [
+      "No chemical pesticide intervention is required or recommended for healthy plants",
+      "Avoid routine chemical spraying to preserve beneficial predatory insects"
+    ],
+    "source_references": [
+      "ICAR Good Agricultural Practices (GAP) for Tomato (https://icar.org.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Potato___Early_blight": {
+    "raw_label": "Potato___Early_blight",
+    "crop": "Potato",
+    "disease": "Early Blight",
+    "is_healthy": false,
+    "overview": "Caused by Alternaria solani, early blight in potatoes results in brown, angular or circular spots with concentric rings on leaves, reducing tuber size and yield.",
+    "symptoms": [
+      "Brown to black circular or angular spots with concentric target-rings",
+      "Lesions surrounded by yellow chlorotic halo",
+      "Progresses from lower leaves upward as crop matures",
+      "Dark, sunken, corky dry rot lesions on potato tubers"
+    ],
+    "non_chemical_management": [
+      "Maintain adequate vine nutrition, especially nitrogen and potassium",
+      "Avoid overhead sprinkler irrigation in late afternoon",
+      "Destroy potato haulms and vines after harvest"
+    ],
+    "prevention": [
+      "Use certified disease-free seed tubers",
+      "Practice 3-year crop rotation avoiding other solanaceous crops",
+      "Harvest only when tuber skin is well-cured and firm"
+    ],
+    "treatment": [
+      "Spray Mancozeb 75% WP @ 2.0-2.5 g/L or Chlorothalonil 75% WP @ 2.0 g/L",
+      "Curative option: Azoxystrobin 23% SC @ 1.0 ml/L or Difenoconazole 25% EC @ 0.5 ml/L"
+    ],
+    "active_ingredients": [
+      "Mancozeb 75 WP fungicide",
+      "Chlorothalonil fungicide",
+      "Difenoconazole 25 EC"
+    ],
+    "safety_precautions": [
+      "Wear full PPE during preparation and application",
+      "Adhere to a 7-day harvest interval for market potatoes"
+    ],
+    "source_references": [
+      "ICAR-CPRI (Central Potato Research Institute) - Disease Management (https://cpri.icar.gov.in)",
+      "TNAU Agritech Portal - Potato Protection (https://agritech.tnau.ac.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Potato___Late_blight": {
+    "raw_label": "Potato___Late_blight",
+    "crop": "Potato",
+    "disease": "Late Blight",
+    "is_healthy": false,
+    "overview": "Caused by Phytophthora infestans, potato late blight is a severe epidemic disease that can destroy whole fields within a week under cool, foggy, and rainy conditions.",
+    "symptoms": [
+      "Water-soaked irregular pale green to dark brown patches on leaf tips and edges",
+      "White delicate downy mold on the lower leaf surface bordering spots",
+      "Purplish-brown lesions on stems and petioles causing vine collapse",
+      "Dry, granular rust-colored rot extending into the tuber flesh"
+    ],
+    "non_chemical_management": [
+      "Promptly destroy early infected focal spots in the field",
+      "Hill up soil around rows (high earthing up) to protect tubers from wash-down spores",
+      "Cut and destroy haulms 10-12 days before tuber harvest"
+    ],
+    "prevention": [
+      "Plant certified blight-resistant potato varieties (e.g. Kufri Girdhari, Kufri Himalini)",
+      "Never use seed tubers from late-blight infected fields",
+      "Ensure proper row spacing for wind ventilation"
+    ],
+    "treatment": [
+      "Prophylactic spray: Mancozeb 75% WP @ 2.5 g/L or Copper Oxychloride 50% WP @ 3.0 g/L",
+      "Curative spray on disease outbreak: Cymoxanil 8% + Mancozeb 64% WP @ 2.0 g/L or Metalaxyl 8% + Mancozeb 64% WP @ 2.5 g/L",
+      "Alternative systemic: Dimethomorph 50% WP @ 1.0 g/L mixed with Mancozeb"
+    ],
+    "active_ingredients": [
+      "Metalaxyl Mancozeb fungicide",
+      "Cymoxanil Mancozeb fungicide",
+      "Copper Oxychloride 50 WP"
+    ],
+    "safety_precautions": [
+      "Strictly observe 7-10 day pre-harvest interval",
+      "Dispose of empty pesticide containers safely in accordance with agrochemical regulations"
+    ],
+    "source_references": [
+      "ICAR-CPRI (Central Potato Research Institute) Late Blight Advisory (https://cpri.icar.gov.in)",
+      "ICAR Agricultural Extension Network (https://icar.org.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Potato___healthy": {
+    "raw_label": "Potato___healthy",
+    "crop": "Potato",
+    "disease": "Healthy Plant",
+    "is_healthy": true,
+    "overview": "The potato vines and foliage show healthy dark green development without water-soaked lesions, target spots, or premature wilt.",
+    "symptoms": [
+      "Dark green, sturdy foliage and erect haulms",
+      "Absence of necrotic lesions, downy growth, or chlorotic yellowing"
+    ],
+    "non_chemical_management": [
+      "Perform proper earthing-up to prevent tuber greening",
+      "Maintain consistent moisture during tuber initiation and bulking"
+    ],
+    "prevention": [
+      "Continue monitoring canopy underside for any early signs of blight",
+      "Maintain balanced N-P-K nutrition (avoid excessive nitrogen)"
+    ],
+    "treatment": [],
+    "active_ingredients": [],
+    "safety_precautions": [
+      "No chemical pesticide application is necessary for healthy potato plants"
+    ],
+    "source_references": [
+      "ICAR-CPRI Good Agricultural Practices (https://cpri.icar.gov.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Apple___Apple_scab": {
+    "raw_label": "Apple___Apple_scab",
+    "crop": "Apple",
+    "disease": "Apple Scab",
+    "is_healthy": false,
+    "overview": "Caused by Venturia inaequalis, apple scab produces olive-green to black velvety spots on leaves and scabby lesions on fruits, common in temperate spring rains.",
+    "symptoms": [
+      "Olive-green to velvety dark brown circular spots on leaves",
+      "Leaves become distorted, puckered, and drop prematurely",
+      "Brown to black corky scabs on apple fruits causing cracking"
+    ],
+    "non_chemical_management": [
+      "Collect and compost or burn fallen leaves in autumn to eliminate overwintering spores",
+      "Prune tree canopy annually to enhance sunlight penetration and rapid drying"
+    ],
+    "prevention": [
+      "Plant scab-resistant apple cultivars",
+      "Monitor temperature and leaf wetness duration during bud burst and petal fall"
+    ],
+    "treatment": [
+      "Protective spray: Captan 50% WP @ 2.5 g/L or Mancozeb 75% WP @ 2.5 g/L",
+      "Post-infection curative: Difenoconazole 25% EC @ 0.3 ml/L or Myclobutanil 10% WP @ 0.5 g/L"
+    ],
+    "active_ingredients": [
+      "Captan 50 WP fungicide",
+      "Difenoconazole 25 EC",
+      "Mancozeb 75 WP fungicide"
+    ],
+    "safety_precautions": [
+      "Wear full protective gear during orchard spraying",
+      "Adhere strictly to 14-day pre-harvest interval"
+    ],
+    "source_references": [
+      "ICAR-CITH (Central Institute of Temperate Horticulture) (https://cith.icar.gov.in)",
+      "University Horticulture Extension Advisory"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Corn___Common_rust": {
+    "raw_label": "Corn___Common_rust",
+    "crop": "Corn (Maize)",
+    "disease": "Common Rust",
+    "is_healthy": false,
+    "overview": "Caused by Puccinia sorghi, common rust causes powdery, cinnamon-brown pustules on both upper and lower corn leaf surfaces, favored by moderate temperatures and high humidity.",
+    "symptoms": [
+      "Small, powdery cinnamon-brown to reddish pustules on both leaf surfaces",
+      "Pustules rupture the epidermis, releasing powdery spores",
+      "Severely affected leaves turn yellow and die prematurely"
+    ],
+    "non_chemical_management": [
+      "Select resistant or tolerant maize hybrids",
+      "Avoid late planting dates which expose crops to peak spore loads"
+    ],
+    "prevention": [
+      "Destroy volunteer maize plants and crop residues after harvest",
+      "Ensure balanced soil potassium and nitrogen levels"
+    ],
+    "treatment": [
+      "Foliar spray with Mancozeb 75% WP @ 2.0-2.5 g/L upon early pustule detection",
+      "For severe infections on valuable seed crops: Azoxystrobin 23% SC @ 1.0 ml/L or Propiconazole 25% EC @ 1.0 ml/L"
+    ],
+    "active_ingredients": [
+      "Mancozeb 75 WP fungicide",
+      "Propiconazole 25 EC",
+      "Azoxystrobin 23 SC"
+    ],
+    "safety_precautions": [
+      "Wear safety goggles and mask; adhere to 14-day pre-harvest interval"
+    ],
+    "source_references": [
+      "ICAR-IIMR (Indian Institute of Maize Research) (https://iimr.icar.gov.in)",
+      "TNAU Maize Pathology Advisory (https://agritech.tnau.ac.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Pepper,_bell___Bacterial_spot": {
+    "raw_label": "Pepper,_bell___Bacterial_spot",
+    "crop": "Bell Pepper / Capsicum",
+    "disease": "Bacterial Spot",
+    "is_healthy": false,
+    "overview": "Caused by Xanthomonas campestris pv. vesicatoria, this bacterial disease affects bell pepper and chilli foliage and fruit during warm, rainy weather.",
+    "symptoms": [
+      "Water-soaked circular to irregular dark spots on leaves",
+      "Lesions turn brown with greasy centers and chlorotic yellow borders",
+      "Extensive leaf shedding and blister-like spots on pepper fruit"
+    ],
+    "non_chemical_management": [
+      "Avoid sprinkler irrigation and working in wet fields",
+      "Remove diseased leaves during early onset"
+    ],
+    "prevention": [
+      "Use certified disease-free seeds or hot water treated seeds",
+      "Rotate with non-solanaceous crops for at least 2 seasons"
+    ],
+    "treatment": [
+      "Spray Copper Oxychloride 50% WP @ 2.5 g/L mixed with Streptocycline @ 0.1 g/L (100 ppm) at 10-12 day intervals"
+    ],
+    "active_ingredients": [
+      "Copper Oxychloride 50 WP",
+      "Streptocycline bactericide"
+    ],
+    "safety_precautions": [
+      "Wear PPE; adhere to 5-day pre-harvest waiting interval"
+    ],
+    "source_references": [
+      "ICAR-IIHR Vegetable Pathology Advisory (https://iihr.res.in)",
+      "TNAU Capsicum Crop Guide (https://agritech.tnau.ac.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  },
+  "Pepper,_bell___healthy": {
+    "raw_label": "Pepper,_bell___healthy",
+    "crop": "Bell Pepper / Capsicum",
+    "disease": "Healthy Plant",
+    "is_healthy": true,
+    "overview": "Healthy bell pepper leaves displaying uniform green color and no bacterial or fungal lesions.",
+    "symptoms": [
+      "Clean, smooth, vibrant green foliage",
+      "No spotting, curling, or chlorosis"
+    ],
+    "non_chemical_management": [
+      "Maintain consistent soil moisture and organic mulching"
+    ],
+    "prevention": [
+      "Scout foliage weekly for thrips or mites"
+    ],
+    "treatment": [],
+    "active_ingredients": [],
+    "safety_precautions": [
+      "No chemical treatment required for healthy plants"
+    ],
+    "source_references": [
+      "ICAR Good Agricultural Practices (https://icar.org.in)"
+    ],
+    "last_reviewed": "2026-03-15",
+    "verification_status": "verified"
+  }
+}

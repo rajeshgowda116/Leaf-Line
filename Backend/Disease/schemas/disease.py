@@ -28,10 +28,29 @@ class PredictionResponse(BaseModel):
     status: str = "preliminary"
     model_name: str
     overview: str = ""
+    is_leaf: bool = True
+    detected_crop: Optional[str] = None
+    crop_confidence: Optional[float] = None
+    validation_message: Optional[str] = None
     treatment_guidance: Optional[TreatmentGuidance] = None
     source_references: List[str] = Field(default_factory=list)
     human_review_required: bool = True
     top_predictions: List[ClassScore] = Field(default_factory=list)
+
+
+class CropCandidate(BaseModel):
+    crop: str
+    display_name: str
+    score: float
+
+
+class CropDetectionResponse(BaseModel):
+    is_leaf: bool
+    detected_crop: Optional[str] = None
+    display_name: Optional[str] = None
+    confidence: Optional[float] = None
+    message: str
+    all_crops: List[CropCandidate] = Field(default_factory=list)
 
 
 class CropInfo(BaseModel):

@@ -102,6 +102,104 @@ CROP_REGISTRY: Dict[str, Dict[str, Any]] = {
         ],
         "notes": "Verified ConvNeXt-Small model trained on 8 cucumber leaf classes.",
     },
+    "corn": {
+        "display_name": "Corn (Maize)",
+        "emoji": "🌽",
+        "model_id": "LeafLine/plant_disease_model.keras",
+        "architecture": "keras_multicrop",
+        "is_verified": True,
+        "classes": [
+            "Cercospora Leaf Spot (Gray Leaf Spot)",
+            "Common Rust",
+            "Northern Leaf Blight",
+            "Healthy",
+        ],
+        "indices": [7, 8, 9, 10],
+        "notes": "Multi-crop PlantVillage CNN classifier for maize/corn diseases.",
+    },
+    "potato": {
+        "display_name": "Potato",
+        "emoji": "🥔",
+        "model_id": "LeafLine/plant_disease_model.keras",
+        "architecture": "keras_multicrop",
+        "is_verified": True,
+        "classes": [
+            "Early Blight",
+            "Late Blight",
+            "Healthy",
+        ],
+        "indices": [20, 21, 22],
+        "notes": "Multi-crop PlantVillage CNN classifier for potato blights.",
+    },
+    "apple": {
+        "display_name": "Apple",
+        "emoji": "🍎",
+        "model_id": "LeafLine/plant_disease_model.keras",
+        "architecture": "keras_multicrop",
+        "is_verified": True,
+        "classes": [
+            "Apple Scab",
+            "Black Rot",
+            "Cedar Apple Rust",
+            "Healthy",
+        ],
+        "indices": [0, 1, 2, 3],
+        "notes": "Multi-crop PlantVillage CNN classifier for apple diseases.",
+    },
+    "grape": {
+        "display_name": "Grape",
+        "emoji": "🍇",
+        "model_id": "LeafLine/plant_disease_model.keras",
+        "architecture": "keras_multicrop",
+        "is_verified": True,
+        "classes": [
+            "Black Rot",
+            "Esca (Black Measles)",
+            "Leaf Blight (Isariopsis Leaf Spot)",
+            "Healthy",
+        ],
+        "indices": [11, 12, 13, 14],
+        "notes": "Multi-crop PlantVillage CNN classifier for grape diseases.",
+    },
+    "peach": {
+        "display_name": "Peach",
+        "emoji": "🍑",
+        "model_id": "LeafLine/plant_disease_model.keras",
+        "architecture": "keras_multicrop",
+        "is_verified": True,
+        "classes": [
+            "Bacterial Spot",
+            "Healthy",
+        ],
+        "indices": [16, 17],
+        "notes": "Multi-crop PlantVillage CNN classifier for peach diseases.",
+    },
+    "strawberry": {
+        "display_name": "Strawberry",
+        "emoji": "🍓",
+        "model_id": "LeafLine/plant_disease_model.keras",
+        "architecture": "keras_multicrop",
+        "is_verified": True,
+        "classes": [
+            "Leaf Scorch",
+            "Healthy",
+        ],
+        "indices": [26, 27],
+        "notes": "Multi-crop PlantVillage CNN classifier for strawberry diseases.",
+    },
+    "cherry": {
+        "display_name": "Cherry",
+        "emoji": "🍒",
+        "model_id": "LeafLine/plant_disease_model.keras",
+        "architecture": "keras_multicrop",
+        "is_verified": True,
+        "classes": [
+            "Powdery Mildew",
+            "Healthy",
+        ],
+        "indices": [5, 6],
+        "notes": "Multi-crop PlantVillage CNN classifier for cherry diseases.",
+    },
 }
 
 _LOADED_MODELS: Dict[str, Any] = {}
@@ -139,9 +237,8 @@ def get_crop_classes(crop: str) -> Optional[Dict[str, Any]]:
 
 def load_crop_model(crop: str) -> Optional[Any]:
     """
-    Lazily loads and caches the PyTorch / timm model for a given crop.
-    Only attempts loading if model weights are already cached locally or if DOWNLOAD_MODELS=true,
-    preventing user HTTP requests from hanging on slow network downloads.
+    Lazily loads and caches the PyTorch / timm / Keras model for a given crop.
+    Only attempts remote download if DOWNLOAD_MODELS=true.
     """
     import os
     if os.getenv("TESTING") == "1":
@@ -156,6 +253,31 @@ def load_crop_model(crop: str) -> Optional[Any]:
 
     info = CROP_REGISTRY[norm_crop]
     model_id = info["model_id"]
+
+    # Local multi-crop Keras model
+    if info.get("architecture") == "keras_multicrop":
+        try:
+            from services.api_backend_model_cache import get_cached_keras_model
+        except ImportError:
+            try:
+                from Disease.services.api_backend_model_cache import get_cached_keras_model
+            except ImportError:
+                from api_backend_model_cache import get_cached_keras_model
+        
+        candidates = [
+            Path(__file__).resolve().parent.parent.parent / "models" / "plant_disease_model.keras",
+            Path(__file__).resolve().parent.parent.parent.parent / "models" / "plant_disease_model.keras",
+        ]
+        model_path = next((p for p in candidates if p.exists()), None)
+        if model_path:
+            try:
+                model = get_cached_keras_model(str(model_path))
+                _LOADED_MODELS[norm_crop] = model
+                return model
+            except Exception as e:
+                logger.warning(f"Could not load local Keras model for {norm_crop}: {e}")
+                return None
+        return None
 
     try:
         from huggingface_hub import try_to_load_from_cache
@@ -240,7 +362,7 @@ def predict_disease(
     """
     Coordinates model inference for the given crop:
     1. Validates crop
-    2. Loads model or applies image feature inference
+    2. Loads model (ConvNeXt, VGG16, or Keras multi-crop) or applies image feature inference
     3. Returns (predicted_class, confidence, model_name, status, top_scores)
     """
     norm_crop = normalize_crop_name(crop)
@@ -251,8 +373,40 @@ def predict_disease(
     classes = info["classes"]
     model_name = info["model_id"]
 
-    model = load_crop_model(norm_crop)
+    # 1. Keras multi-crop model branch (corn, potato, apple, grape, peach, strawberry, cherry)
+    if info.get("architecture") == "keras_multicrop":
+        model = load_crop_model(norm_crop)
+        indices = info.get("indices", [])
+        if model is not None and indices:
+            try:
+                img_resized = image.convert("RGB").resize((128, 128))
+                x = np.expand_dims(np.array(img_resized, dtype="float32") / 255.0, axis=0)
+                preds = model.predict(x, verbose=0)[0]
 
+                raw_crop_scores = [float(preds[i]) for i in indices]
+                score_sum = sum(raw_crop_scores)
+                if score_sum > 0:
+                    crop_probs = [s / score_sum for s in raw_crop_scores]
+                else:
+                    crop_probs = [1.0 / len(indices)] * len(indices)
+
+                top_idx = int(np.argmax(crop_probs))
+                confidence = float(crop_probs[top_idx])
+                predicted_class = classes[top_idx]
+
+                score_list = [
+                    {"label": classes[i], "score": round(float(crop_probs[i]), 4)}
+                    for i in range(len(classes))
+                ]
+                score_list.sort(key=lambda item: item["score"], reverse=True)
+
+                status = "confirmed" if confidence >= 0.45 else "inconclusive"
+                return predicted_class, round(confidence, 4), model_name, status, score_list
+            except Exception as e:
+                logger.warning(f"Inference error on Keras multi-crop model for {norm_crop}: {e}")
+
+    # 2. PyTorch / timm branch
+    model = load_crop_model(norm_crop)
     if model is not None:
         try:
             tensor = preprocess_for_model(image)
@@ -268,10 +422,12 @@ def predict_disease(
                     for i in range(len(probs))
                 ]
                 score_list.sort(key=lambda x: x["score"], reverse=True)
-                return predicted_class, round(confidence, 4), model_name, "preliminary", score_list
+                status = "confirmed" if confidence >= 0.45 else "inconclusive"
+                return predicted_class, round(confidence, 4), model_name, status, score_list
         except Exception as e:
             logger.error(f"Inference error with model {model_name}: {e}. Falling back.")
 
-    # Fallback inference
+    # 3. Deterministic feature-based fallback
     predicted_class, confidence, score_list = run_fallback_inference(image, classes)
-    return predicted_class, confidence, model_name, "preliminary", score_list
+    status = "confirmed" if confidence >= 0.45 else "inconclusive"
+    return predicted_class, confidence, model_name, status, score_list
