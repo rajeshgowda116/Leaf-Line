@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TreeTrack AI - Plant Disease Detection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              green: '#0ea5e9', // Base green customized below
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      background-image: radial-gradient(circle at top left, #edfbd8 0%, transparent 40%), radial-gradient(circle at bottom right, #f0fdf4 0%, transparent 40%);
+    }
+  </style>
+</head>
+
+<body class="text-gray-800 antialiased font-sans min-h-screen">
+
+  <!-- Navbar -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    <nav class="bg-white rounded-full shadow-sm py-3 px-6 flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-leaf text-brand-500 text-3xl"></i>
+        <div>
+          <h1 class="font-bold text-xl leading-tight">TreeTrack AI</h1>
+          <p class="text-xs text-gray-500">Plant Disease Detection</p>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="hidden md:flex items-center space-x-8 font-medium text-sm">
+        <a href="#" class="flex items-center space-x-2 bg-brand-50 text-brand-700 px-4 py-2 rounded-full">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-gray-600 hover:text-brand-600 transition">
+          <i class="fa-solid fa-gear"></i>
+          <span>How It Works</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-gray-600 hover:text-brand-600 transition">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>About</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-gray-600 hover:text-brand-600 transition">
+          <i class="fa-solid fa-circle-question"></i>
+          <span>FAQs</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Left Content -->
+      <div>
+        <div
+          class="inline-flex items-center space-x-2 bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full text-sm font-semibold mb-6 shadow-sm border border-brand-100">
+          <i class="fa-solid fa-leaf"></i>
+          <span>AI-Powered Plant Disease Detection</span>
+        </div>
+
+        <h2 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-gray-900">
+          Detect <span class="text-brand-600">Vegetable</span><br>Diseases Easily
+        </h2>
+
+        <p class="text-lg text-gray-600 mb-10 max-w-lg">
+          Upload a leaf image and get instant AI-based disease detection, symptoms, and treatment suggestions for
+          healthier crops.
+        </p>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-bolt text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">AI Analysis</h4>
+            <p class="text-xs text-gray-500 mt-1">Accurate Detection</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-book-open text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">Expert Guidance</h4>
+            <p class="text-xs text-gray-500 mt-1">Treatment & Prevention</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-leaf text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">Multiple Crops</h4>
+            <p class="text-xs text-gray-500 mt-1">Support for 5+ Vegetables</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-shield-check text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">Farmer Friendly</h4>
+            <p class="text-xs text-gray-500 mt-1">Simple and Easy to Use</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image Area -->
+      <div class="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
+        <!-- Main Image Placeholder (Hands holding leaf) -->
+        <img src="https://images.unsplash.com/photo-1530836369250-ef71a3f5e92d?auto=format&fit=crop&w=800&q=80"
+          alt="Farmer checking leaf" class="absolute inset-0 w-full h-full object-cover">
+
+        <!-- Scanning UI Overlay Overlay -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-64 h-64 border-2 border-brand-400 rounded-lg relative">
+            <div class="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-brand-500 -ml-1 -mt-1 rounded-tl">
+            </div>
+            <div class="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-brand-500 -mr-1 -mt-1 rounded-tr">
+            </div>
+            <div class="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 border-brand-500 -ml-1 -mb-1 rounded-bl">
+            </div>
+            <div
+              class="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 border-brand-500 -mr-1 -mb-1 rounded-br">
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Result Card -->
+        <div class="absolute top-8 right-8 bg-white p-5 rounded-2xl shadow-xl w-72 backdrop-blur-sm bg-white/95">
+          <div class="bg-red-50 text-red-600 font-bold text-xs py-1.5 px-3 rounded-md inline-flex items-center mb-4">
+            <i class="fa-solid fa-triangle-exclamation mr-2"></i> Disease Detected
+          </div>
+          <h3 class="font-bold text-lg text-gray-900 mb-1">Early Blight</h3>
+
+          <div class="flex justify-between items-center text-sm mb-1 mt-3">
+            <span class="text-gray-600">Confidence</span>
+            <span class="font-bold text-gray-900">92%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+            <div class="bg-brand-500 h-2 rounded-full" style="width: 92%"></div>
+          </div>
+
+          <div class="flex items-center space-x-2 text-sm font-semibold text-gray-800 mb-2 mt-4">
+            <i class="fa-solid fa-leaf text-brand-600"></i>
+            <span>Suggestions</span>
+          </div>
+          <ul class="text-xs text-gray-600 space-y-2">
+            <li class="flex items-start"><span class="text-brand-500 mr-2 mt-0.5">•</span> Remove infected leaves</li>
+            <li class="flex items-start"><span class="text-brand-500 mr-2 mt-0.5">•</span> Improve air circulation</li>
+            <li class="flex items-start"><span class="text-brand-500 mr-2 mt-0.5">•</span> Use recommended fungicide
+            </li>
+            <li class="flex items-start"><span class="text-brand-500 mr-2 mt-0.5">•</span> Monitor regularly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Crop Selection Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 flex items-center justify-center space-x-3">
+        <i class="fa-solid fa-leaf text-brand-500 text-2xl transform -scale-x-100"></i>
+        <span>Select a <span class="text-brand-600">Vegetable</span> to Detect Disease</span>
+        <i class="fa-solid fa-leaf text-brand-500 text-2xl"></i>
+      </h2>
+      <p class="text-gray-600 mt-4 text-lg">Choose the crop you want to analyze. Upload a clear leaf image to get
+        instant results.</p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+      <!-- Tomato Card -->
+      <div
+        class="bg-red-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=400&q=80"
+            alt="Tomato" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-red-50">
+          🍅
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Tomato</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Detect common tomato diseases like Early Blight, Late Blight, Leaf Mold and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html.html':'/chat')+'?crop=tomato'"
+            class="bg-red-600 hover:bg-red-700 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chilli Card -->
+      <div
+        class="bg-emerald-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1588047910543-91185461159c?auto=format&fit=crop&w=400&q=80"
+            alt="Chilli" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-emerald-50">
+          🌶️
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Chilli</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Identify chilli leaf diseases such as Leaf Curl Virus, Bacterial Spot and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html.html':'/chat')+'?crop=chilli'"
+            class="bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Brinjal Card -->
+      <div
+        class="bg-purple-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1627913348123-b1dff39f506e?auto=format&fit=crop&w=400&q=80"
+            alt="Brinjal" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-purple-50">
+          🍆
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Brinjal</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Detect brinjal diseases like Cercospora Leaf Spot, Bacterial Wilt and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html.html':'/chat')+'?crop=brinjal'"
+            class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Ladies' Finger Card -->
+      <div
+        class="bg-green-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1598270570701-447e1136b85f?auto=format&fit=crop&w=400&q=80"
+            alt="Ladies Finger" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-green-50">
+          <i class="fa-solid fa-leaf text-green-600"></i>
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Ladies' Finger</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Identify okra diseases such as Yellow Vein Mosaic Virus, Leaf Spot and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html.html':'/chat')+'?crop=okra'"
+            class="bg-green-800 hover:bg-green-900 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cucumber Card -->
+      <div
+        class="bg-blue-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=400&q=80"
+            alt="Cucumber" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-blue-50">
+          🥒
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Cucumber</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Detect cucumber diseases like Powdery Mildew, Downy Mildew and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html.html':'/chat')+'?crop=cucumber'"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+
+</html>

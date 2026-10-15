@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environments & Local Config
+.env
+*.local
+models_cache/
+uploaded_images/
+
+# IDEs
+.vscode/
+.idea/

@@ -1,0 +1,533 @@
+{
+  "tomato": {
+    "Early Blight": {
+      "crop": "tomato",
+      "disease": "Early Blight",
+      "overview": "Early blight is a common fungal disease caused by Alternaria solani. It primarily affects older foliage first, producing dark brown target-like circular spots with concentric rings, surrounded by yellow chlorotic halos.",
+      "symptoms": [
+        "Dark brown to black spots with concentric rings ('target board' pattern)",
+        "Yellowing of foliage surrounding the lesions",
+        "Starts on lower older leaves and progresses upward",
+        "Severe infection leads to leaf death, defoliation, and sunscald on fruits"
+      ],
+      "prevention": [
+        "Use certified pathogen-free seeds and healthy seedlings",
+        "Practice 2-3 year crop rotation away from solanaceous crops (potato, brinjal, chilli)",
+        "Ensure adequate plant spacing (60 x 45 cm) for optimal canopy aeration",
+        "Use drip irrigation or furrow irrigation instead of overhead sprinklers"
+      ],
+      "non_chemical_control": [
+        "Remove and safely burn or bury infected lower leaves as soon as noticed",
+        "Apply organic mulch (straw or plastic) to prevent soil splash onto lower leaves",
+        "Foliar spray with Trichoderma viride or Pseudomonas fluorescens @ 5 g/litre"
+      ],
+      "verified_treatment": [
+        "Spray Chlorothalonil 75% WP @ 2 g/L or Mancozeb 75% WP @ 2 g/L at the first sign of disease",
+        "In severe cases, spray Azoxystrobin 23% SC @ 1 ml/L or Difenoconazole 25% EC @ 0.5 ml/L",
+        "Repeat application after 10-14 days if wet, humid weather persists"
+      ],
+      "safety_precautions": [
+        "Wear protective gloves, eye goggles, and a face mask during chemical spraying",
+        "Observe a mandatory Pre-Harvest Interval (PHI) of 7-10 days after spraying",
+        "Avoid spraying during high winds or midday peak sunshine"
+      ],
+      "source_url": "https://icar.org.in / TNAU Agritech Portal (Horticulture - Tomato)",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Late Blight": {
+      "crop": "tomato",
+      "disease": "Late Blight",
+      "overview": "Late blight is a destructive oomycete disease caused by Phytophthora infestans. It develops rapidly under cool, wet, and high humidity conditions, causing water-soaked pale lesions that turn dark brown and rot rapidly.",
+      "symptoms": [
+        "Water-soaked, dark olive to brown lesions on leaves and stems",
+        "White velvety fungal growth on the underside of leaves during humid conditions",
+        "Rapid collapse and browning of foliage resembling frost injury",
+        "Firm, greasy dark brown lesions on green or ripe fruits"
+      ],
+      "prevention": [
+        "Plant resistant or tolerant tomato varieties",
+        "Destroy cull piles and volunteer tomato and potato plants in the vicinity",
+        "Avoid overhead sprinkler irrigation and reduce canopy wetness duration"
+      ],
+      "non_chemical_control": [
+        "Immediately prune and bury heavily blighted branches",
+        "Ensure wide spacing and good air drainage in low-lying field spots",
+        "Spray with copper oxychloride formulations before rain periods"
+      ],
+      "verified_treatment": [
+        "Prophylactic spray: Mancozeb 75% WP @ 2.5 g/L or Copper Oxychloride 50% WP @ 3 g/L",
+        "Curative spray on disease onset: Metalaxyl 8% + Mancozeb 64% WP @ 2.5 g/L or Cymoxanil 8% + Mancozeb 64% WP @ 2 g/L"
+      ],
+      "safety_precautions": [
+        "Never wash spray equipment in drinking water sources or ponds",
+        "Adhere to a 7-day pre-harvest interval before harvesting tomatoes"
+      ],
+      "source_url": "ICAR-IIHR (Indian Institute of Horticultural Research) Tomato Disease Compendium",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Bacterial Spot": {
+      "crop": "tomato",
+      "disease": "Bacterial Spot",
+      "overview": "Bacterial spot is caused by Xanthomonas campestris pv. vesicatoria. It leads to small water-soaked dark spots on leaves and scabby lesions on fruits, exacerbated by warm, rainy weather.",
+      "symptoms": [
+        "Small, circular to angular water-soaked dark spots on leaves",
+        "Lesions turn brown to black with a narrow yellow margin",
+        "Scabby, elevated spots with dark borders on tomato fruits",
+        "Severe leaf spot coalesces causing shot-hole appearance and defoliation"
+      ],
+      "prevention": [
+        "Use certified disease-free treated seed (hot water treatment at 50°C for 25 minutes)",
+        "Avoid working in field rows when plants are wet with dew or rain",
+        "Practice crop rotation with non-host crops for at least 2 years"
+      ],
+      "non_chemical_control": [
+        "Remove crop residues after harvest through deep summer plowing",
+        "Spray Pseudomonas fluorescens (biocontrol agent) @ 5 g/L"
+      ],
+      "verified_treatment": [
+        "Foliar spray with Copper Oxychloride 50% WP @ 2.5 g/L mixed with Streptocycline @ 0.1 g/L (100 ppm) at 10-15 day intervals"
+      ],
+      "safety_precautions": [
+        "Use protective gear during preparation and application of antibiotic/copper mixtures"
+      ],
+      "source_url": "TNAU Agritech Portal (Tomato Bacterial Diseases)",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Yellow Leaf Curl Virus": {
+      "crop": "tomato",
+      "disease": "Yellow Leaf Curl Virus",
+      "overview": "Tomato Yellow Leaf Curl Virus (TYLCV) is a begomovirus transmitted by the whitefly (Bemisia tabaci). It causes severe stunting, upward leaf curling, yellowing, and drastic flower drop.",
+      "symptoms": [
+        "Marked upward curling and cup-shaped crinkling of leaf margins",
+        "Interveinal chlorosis and yellowing of young leaves",
+        "Severely stunted plant height with bunched terminal shoots",
+        "Premature drop of blossoms, resulting in negligible fruit setting"
+      ],
+      "prevention": [
+        "Install yellow sticky traps @ 12-15 traps per acre to monitor and reduce whiteflies",
+        "Grow barrier crops like maize, sorghum, or pearl millet (4 rows around the border)",
+        "Use 40-mesh insect-proof nylon nets in nursery beds"
+      ],
+      "non_chemical_control": [
+        "Rogue out and destroy virus-infected plants during early vegetative stage",
+        "Spray Neem Oil (Azadirachtin 1500 ppm) @ 3-5 ml/L to deter whitefly vectors"
+      ],
+      "verified_treatment": [
+        "Vector management: Spray Imidacloprid 17.8% SL @ 0.3 ml/L or Thiamethoxam 25% WG @ 0.3 g/L or Spiromesifen 22.9% SC @ 1 ml/L"
+      ],
+      "safety_precautions": [
+        "Do not spray systemic neonicotinoids during peak pollinator visitation hours"
+      ],
+      "source_url": "ICAR-Indian Institute of Vegetable Research (IIVR) Pest Advisory",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Leaf Mold": {
+      "crop": "tomato",
+      "disease": "Leaf Mold",
+      "overview": "Leaf mold is caused by the fungus Passalora fulva (formerly Cladosporium fulvum). It is especially prevalent in greenhouses and high-humidity humid conditions.",
+      "symptoms": [
+        "Pale greenish-yellow chlorotic spots on upper leaf surfaces",
+        "Olive-green to grayish-brown velvety mold on the underside of corresponding spots",
+        "Leaves wither, curl, and die prematurely from bottom to top"
+      ],
+      "prevention": [
+        "Maximize greenhouse ventilation and reduce relative humidity below 85%",
+        "Increase plant spacing to promote sunlight penetration and air movement",
+        "Avoid wetting tomato leaves during irrigation"
+      ],
+      "non_chemical_control": [
+        "Prune lower suckers and dense canopy foliage",
+        "Biological control: Trichoderma harzianum foliar spray @ 5 g/L"
+      ],
+      "verified_treatment": [
+        "Spray Mancozeb 75% WP @ 2 g/L or Difenoconazole 25% EC @ 0.5 ml/L or Chlorothalonil 75% WP @ 2 g/L"
+      ],
+      "safety_precautions": [
+        "Ensure well-ventilated conditions when handling chemical fungicides"
+      ],
+      "source_url": "ICAR-IIHR Tomato Disease Management",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Healthy": {
+      "crop": "tomato",
+      "disease": "Healthy",
+      "overview": "The leaf appears vigorous, green, and devoid of significant pathological lesions or fungal/bacterial blight.",
+      "symptoms": [
+        "Uniform green color across leaf surface and veins",
+        "No chlorotic yellowing, necrotic spots, or curling observed",
+        "Firm leaf texture with healthy turgor pressure"
+      ],
+      "prevention": [
+        "Continue balanced N-P-K fertilization according to crop growth stage",
+        "Maintain routine weekly visual scouting for early pest or disease signs",
+        "Ensure consistent soil moisture without waterlogging"
+      ],
+      "non_chemical_control": [
+        "Routine prophylactic spraying of cow dung-urine slurry or neem cake extract",
+        "Beneficial companion planting with marigolds to deter root-knot nematodes"
+      ],
+      "verified_treatment": [
+        "No chemical intervention required for healthy plants"
+      ],
+      "safety_precautions": [
+        "Avoid unnecessary pesticide sprays to protect natural predators and bees"
+      ],
+      "source_url": "ICAR Good Agricultural Practices (GAP) for Solanaceous Vegetables",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    }
+  },
+  "chilli": {
+    "Curl Virus": {
+      "crop": "chilli",
+      "disease": "Curl Virus",
+      "overview": "Chilli leaf curl disease is caused by Chilli Leaf Curl Begomovirus and vectored by whiteflies (Bemisia tabaci). Often co-occurring with thrips and mite feeding which causes upward or downward curling.",
+      "symptoms": [
+        "Upward curling, puckering, and crinkling of leaves",
+        "Reduction in leaf size, thickening and shortening of internodes",
+        "Crowded, bushy stunted appearance of plants",
+        "Drastic reduction in flowering and small, malformed fruits"
+      ],
+      "prevention": [
+        "Grow barrier crops like maize or pearl millet (3-4 rows) around the plot",
+        "Use silver/black reflective plastic mulch to repel whitefly and thrips vectors",
+        "Install yellow sticky traps (15/acre) and blue sticky traps (10/acre)"
+      ],
+      "non_chemical_control": [
+        "Rogue and burn symptomatic plants immediately during early stages",
+        "Foliar spray of 5% Neem Seed Kernel Extract (NSKE) or Azadirachtin 10,000 ppm @ 1 ml/L"
+      ],
+      "verified_treatment": [
+        "Vector control: Spray Diafenthiuron 50% WP @ 1.2 g/L or Fipronil 5% SC @ 1.5 ml/L",
+        "For whiteflies specifically: Acetamiprid 20% SP @ 0.2 g/L or Pyriproxyfen 10% EC @ 1 ml/L"
+      ],
+      "safety_precautions": [
+        "Do not apply chemicals in bloom period; observe 7-day harvest waiting period"
+      ],
+      "source_url": "ICAR-Indian Institute of Spices Research (IISR) & TNAU Agritech",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Bacterial Spot": {
+      "crop": "chilli",
+      "disease": "Bacterial Spot",
+      "overview": "Caused by Xanthomonas campestris pv. vesicatoria. Promoted by high temperature (24-30°C) and frequent rainfall.",
+      "symptoms": [
+        "Circular to irregular dark brown spots with a greasy water-soaked appearance",
+        "Spots on leaves may coalesce, causing yellowing and premature leaf fall",
+        "Small, blister-like raised rough spots on green chilli pods"
+      ],
+      "prevention": [
+        "Seed treatment with hot water (50°C for 25 mins) or Streptocycline @ 100 ppm",
+        "Avoid overhead irrigation and field entry when plants are wet"
+      ],
+      "non_chemical_control": [
+        "Spray Pseudomonas fluorescens @ 5 g/litre at 15-day intervals",
+        "Remove and destroy crop debris immediately after harvest"
+      ],
+      "verified_treatment": [
+        "Spray Copper Oxychloride 50% WP @ 2.5 g/L + Streptocycline @ 0.1 g/L twice at 10-day intervals"
+      ],
+      "safety_precautions": [
+        "Use safety mask and gloves when handling bactericides"
+      ],
+      "source_url": "ICAR-IISR Chilli Integrated Pest & Disease Management",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Cercospora Leaf Spot": {
+      "crop": "chilli",
+      "disease": "Cercospora Leaf Spot",
+      "overview": "Caused by Cercospora capsici, also known as 'frogeye leaf spot'. Highly prevalent in humid tropical conditions.",
+      "symptoms": [
+        "Circular lesions with whitish or grayish centers and distinct dark brown margins ('frogeye' appearance)",
+        "Lesions enlarge up to 1 cm and may develop yellow halos",
+        "Severely affected leaves turn yellow and drop prematurely, exposing chilli fruit to sun scald"
+      ],
+      "prevention": [
+        "Practice crop rotation avoiding solanaceous crops for 2 seasons",
+        "Maintain adequate spacing between rows to enhance air flow"
+      ],
+      "non_chemical_control": [
+        "Collect and destroy fallen infected leaves from the soil surface",
+        "Apply organic bio-agent Trichoderma viride @ 5 g/L"
+      ],
+      "verified_treatment": [
+        "Spray Mancozeb 75% WP @ 2.5 g/L or Carbendazim 50% WP @ 1 g/L or Azoxystrobin 23% SC @ 1 ml/L"
+      ],
+      "safety_precautions": [
+        "Observe recommended pre-harvest interval before plucking green chillies"
+      ],
+      "source_url": "TNAU Crop Protection Guide (Chilli Diseases)",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Healthy Leaf": {
+      "crop": "chilli",
+      "disease": "Healthy Leaf",
+      "overview": "The chilli foliage exhibits normal healthy coloration, intact leaf margins, and absence of fungal or viral lesions.",
+      "symptoms": [
+        "Dark green, glossy leaf surface",
+        "No curling, mottling, or spot lesions"
+      ],
+      "prevention": [
+        "Maintain balanced soil fertilization (N:P:K 120:60:60 kg/ha in splits)",
+        "Scout weekly for thrips or mite activity underneath tender leaves"
+      ],
+      "non_chemical_control": [
+        "Preventive foliar application of bio-stimulants or diluted panchagavya @ 3%"
+      ],
+      "verified_treatment": [
+        "No chemical fungicide or bactericide necessary"
+      ],
+      "safety_precautions": [],
+      "source_url": "ICAR-IISR Good Agricultural Practices",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    }
+  },
+  "brinjal": {
+    "Cercospora Spot": {
+      "crop": "brinjal",
+      "disease": "Cercospora Spot",
+      "overview": "Cercospora melongenae produces circular to irregular leaf spots leading to premature defoliation in eggplant.",
+      "symptoms": [
+        "Circular brown spots with concentric rings and chlorotic borders",
+        "Spots may drop out, leaving a ragged shot-hole effect",
+        "Premature leaf drop leading to reduced fruit size and yield"
+      ],
+      "prevention": [
+        "Deep summer ploughing to bury overwintering fungal spores",
+        "Maintain 75 x 60 cm spacing for good air circulation"
+      ],
+      "non_chemical_control": [
+        "Prompt sanitation: destroy infected lower leaf prunings",
+        "Spray Trichoderma viride @ 5 g/L as a protective canopy bio-spray"
+      ],
+      "verified_treatment": [
+        "Spray Mancozeb 75% WP @ 2 g/L or Carbendazim 50% WP @ 1 g/L at 10-14 day intervals"
+      ],
+      "safety_precautions": [
+        "Wear personal protective equipment; adhere to 5-day PHI"
+      ],
+      "source_url": "ICAR-IIHR (Brinjal Pathology Section)",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Begomovirus": {
+      "crop": "brinjal",
+      "disease": "Begomovirus",
+      "overview": "Whitefly-transmitted virus causing severe leaf deformation, stunted plants, and poor fruit development.",
+      "symptoms": [
+        "Yellow mosaic patterns on leaves with vein thickening",
+        "Bushy, stunted growth with small leathery leaves",
+        "Flowering is severely curtailed and fruit set is negligible"
+      ],
+      "prevention": [
+        "Install 15 yellow sticky traps per acre across the field",
+        "Use nursery insect-proof netting to raise disease-free saplings"
+      ],
+      "non_chemical_control": [
+        "Uproot and destroy infected plants at early detection",
+        "Spray neem oil 10,000 ppm @ 2 ml/L to deter vector feeding"
+      ],
+      "verified_treatment": [
+        "Spray Thiamethoxam 25% WG @ 0.3 g/L or Imidacloprid 17.8% SL @ 0.3 ml/L for whitefly control"
+      ],
+      "safety_precautions": [
+        "Avoid spraying during active bee foraging hours"
+      ],
+      "source_url": "ICAR-IIVR Vegetable Advisory Bulletin",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Healthy": {
+      "crop": "brinjal",
+      "disease": "Healthy",
+      "overview": "Vigorous brinjal foliage with broad, healthy leaves without spot or virus symptoms.",
+      "symptoms": [
+        "Normal broad green leaves with regular pubescence",
+        "No chlorotic mottling or fungal lesions"
+      ],
+      "prevention": [
+        "Provide regular irrigation and balanced NPK top dressings"
+      ],
+      "non_chemical_control": [
+        "Prophylactic foliar spray of neem oil or seaweed extract"
+      ],
+      "verified_treatment": [
+        "No chemical intervention needed"
+      ],
+      "safety_precautions": [],
+      "source_url": "ICAR Vegetable Crop Production Guide",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    }
+  },
+  "okra": {
+    "Leaf Curl Virus": {
+      "crop": "okra",
+      "disease": "Leaf Curl Virus",
+      "overview": "A serious viral disease transmitted by the whitefly vector (Bemisia tabaci), often grouped with Yellow Vein Mosaic Virus (YVMV).",
+      "symptoms": [
+        "Vein clearing on tender young leaves",
+        "Upward curling, thickening and yellow network of veins",
+        "Leaves become leathery and crinkled with stunted growth",
+        "Fruits turn yellowish-white, fibrous, and unmarketable"
+      ],
+      "prevention": [
+        "Sow YVMV-tolerant/resistant okra varieties (e.g., Parbhani Kranti, Arka Anamika)",
+        "Grow 3 border rows of maize or sorghum to trap incoming whiteflies"
+      ],
+      "non_chemical_control": [
+        "Strict roguing of affected plants within the first 30-45 days",
+        "Foliar spray of 5% NSKE (Neem Seed Kernel Extract)"
+      ],
+      "verified_treatment": [
+        "Vector control: Seed treatment with Imidacloprid 70% WS @ 5 g/kg seed; foliar spray of Thiamethoxam 25% WG @ 0.35 g/L"
+      ],
+      "safety_precautions": [
+        "Maintain 5-day pre-harvest waiting period before picking tender okra pods"
+      ],
+      "source_url": "ICAR-IIVR Okra Protection Guidelines",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Cercospora Leaf Spot": {
+      "crop": "okra",
+      "disease": "Cercospora Leaf Spot",
+      "overview": "Caused by Cercospora abelmoschi and Cercospora malayensis. Manifests in warm, humid weather.",
+      "symptoms": [
+        "Brown to grayish circular or irregular spots on leaves",
+        "Spots merge causing extensive blighting of the leaf blade",
+        "Severe defoliation affects fruit quality and yield"
+      ],
+      "prevention": [
+        "Maintain proper plant spacing (60 x 30 cm)",
+        "Avoid prolonged wet foliage"
+      ],
+      "non_chemical_control": [
+        "Collect and burn fallen leaves",
+        "Spray bio-agent Trichoderma viride @ 5 g/L"
+      ],
+      "verified_treatment": [
+        "Spray Mancozeb 75% WP @ 2 g/L or Carbendazim 50% WP @ 1 g/L"
+      ],
+      "safety_precautions": [
+        "Always observe mandatory safety intervals before pod harvesting"
+      ],
+      "source_url": "TNAU Agritech Portal (Horticulture - Bhendi/Okra)",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Healthy": {
+      "crop": "okra",
+      "disease": "Healthy",
+      "overview": "Normal, healthy okra leaf displaying deep green palmately lobed morphology with no chlorosis or necrosis.",
+      "symptoms": [
+        "Uniform green color across lobes",
+        "Absence of vein clearing or necrotic lesions"
+      ],
+      "prevention": [
+        "Maintain regular weeding and moisture control"
+      ],
+      "non_chemical_control": [
+        "Apply vermicompost and neem cake to soil"
+      ],
+      "verified_treatment": [
+        "No treatment required"
+      ],
+      "safety_precautions": [],
+      "source_url": "ICAR-IIVR Okra Manual",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    }
+  },
+  "cucumber": {
+    "Powdery Mildew": {
+      "crop": "cucumber",
+      "disease": "Powdery Mildew",
+      "overview": "Caused by Podosphaera xanthii (or Erysiphe cichoracearum). Characterized by conspicuous white talcum-like powdery fungal patches on leaf surfaces.",
+      "symptoms": [
+        "White, talcum-powder-like circular spots on upper and lower leaf surfaces",
+        "Spots enlarge and coalesce to cover the entire leaf blade and petioles",
+        "Infected leaves turn yellow, then brown, and become dry and brittle",
+        "Premature leaf loss exposes cucumbers to sunscald"
+      ],
+      "prevention": [
+        "Plant resistant cucumber cultivars where available",
+        "Ensure full sunlight exposure and open trellis training for airflow",
+        "Avoid excessive nitrogen fertilizer which stimulates lush susceptible tissue"
+      ],
+      "non_chemical_control": [
+        "Foliar spray of dilute baking soda solution (0.5% sodium bicarbonate + 0.1% horticultural oil)",
+        "Spray biocontrol Ampelomyces quisqualis or Bacillus subtilis @ 5 g/L"
+      ],
+      "verified_treatment": [
+        "Spray Wettable Sulphur 80% WP @ 2.5 g/L (avoid if temperature > 32°C)",
+        "Or spray Difenoconazole 25% EC @ 0.5 ml/L or Azoxystrobin 23% SC @ 1 ml/L"
+      ],
+      "safety_precautions": [
+        "Do not apply sulphur within 14 days of an oil spray to prevent severe phytotoxicity"
+      ],
+      "source_url": "ICAR-IIHR Cucurbitaceous Vegetable Health Guide",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Downy Mildew": {
+      "crop": "cucumber",
+      "disease": "Downy Mildew",
+      "overview": "Caused by Pseudoperonospora cubensis. Highly devastating water-mold disease in cool, damp, foggy, or rainy conditions.",
+      "symptoms": [
+        "Angular, pale green to bright yellow spots on the upper leaf surface bounded by leaf veins",
+        "Purplish-gray downy/felt-like growth on the lower leaf surface directly under spots during moist mornings",
+        "Spots turn dark brown and necrotic, causing scorched appearance"
+      ],
+      "prevention": [
+        "Trellis vines to keep foliage off moist soil and improve drying",
+        "Irrigate in the early morning using drip lines; avoid overhead wetting"
+      ],
+      "non_chemical_control": [
+        "Remove early affected leaves and dispose of outside the field",
+        "Apply copper hydroxide formulations preventatively"
+      ],
+      "verified_treatment": [
+        "Preventive: Mancozeb 75% WP @ 2.5 g/L or Copper Oxychloride 50% WP @ 3 g/L",
+        "Curative: Cymoxanil 8% + Mancozeb 64% WP @ 2 g/L or Metalaxyl-M 4% + Mancozeb 64% WP @ 2.5 g/L"
+      ],
+      "safety_precautions": [
+        "Strictly adhere to a 5-7 day pre-harvest interval before picking harvestable cucumbers"
+      ],
+      "source_url": "TNAU Agritech Portal (Cucurbit Disease Management)",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    },
+    "Healthy": {
+      "crop": "cucumber",
+      "disease": "Healthy",
+      "overview": "Vibrant, green angular lobed cucumber leaf showing no signs of downy mildew angular spots or powdery white coating.",
+      "symptoms": [
+        "Clean, uniform green foliage",
+        "Absence of yellow angular chlorosis or white powdery growth"
+      ],
+      "prevention": [
+        "Maintain balanced fertigation and regular vine training on trellises"
+      ],
+      "non_chemical_control": [
+        "Preventive application of organic mulch around the root zone"
+      ],
+      "verified_treatment": [
+        "No chemical fungicide needed"
+      ],
+      "safety_precautions": [],
+      "source_url": "ICAR Cucurbit Farming Guidelines",
+      "last_verified_at": "2026-03-15",
+      "verification_status": "verified"
+    }
+  }
+}
