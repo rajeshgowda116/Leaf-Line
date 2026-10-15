@@ -1,0 +1,96 @@
+# ==========================================
+# Python & Virtual Environments
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# ==========================================
+# Jupyter Notebooks & Tests
+# ==========================================
+.ipynb_checkpoints
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ==========================================
+# Machine Learning, Models & Checkpoints
+# ==========================================
+# Model weights & large binary files (uncomment if you store models elsewhere or use git-lfs)
+*.pt
+*.pth
+*.bin
+*.onnx
+*.h5
+*.ckpt
+
+# Datasets & Training logs
+runs/
+wandb/
+checkpoints/
+lightning_logs/
+*.log
+
+# ==========================================
+# Frontend (React / Vite / Next.js / Node)
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.next/
+out/
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ==========================================
+# IDE & Editor Configurations
+# ==========================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
