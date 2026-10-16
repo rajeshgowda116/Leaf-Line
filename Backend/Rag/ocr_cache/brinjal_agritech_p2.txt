@@ -1,0 +1,29 @@
+# IPM PACKAGE FOR BRINJAL
+
+## Contents
+
+| SUBJECT                                       | Page No. |
+| :-------------------------------------------- | :------- |
+| Foreward                                      | i        |
+| Preface                                       | ii       |
+| Acknowledgements                              | iii      |
+| **I. MAJOR PESTS**                            |          |
+| A. Pests of National Significance             | 1        |
+| B. Pest of Regional Significance              | 1        |
+| **II. PEST MONITORING**                       |          |
+| A. Agro-eco-system Analysis (AESA)            | 2        |
+| B. Field scouting                             | 2        |
+| C. Yellow water pan/sticky traps              | 3        |
+| D. Nematodes                                  | 3        |
+| E. Economic threshold levels (ETL)            | 3        |
+| **III. IPM STRATEGIES FOR BRINJAL**           |          |
+| A. Cultural Practices                         | 3        |
+| B. Mechanical control                         | 4        |
+| C. Biological control                         | 5        |
+| D. Biopesticides                              | 6        |
+| E. Botanical pesticides                       | 6        |
+| F. Chemical control                           | 6        |
+| **IV. BRINJAL CROP STAGE-WISE IPM PRACTICES** | 7-8      |
+| **V. DO'S AND DON'TS IN BRINJAL IPM**         | 9-10     |
+| **VI. SAFETY PARAMETERS IN PESTICIDES USAGE** | 11-15    |
+| ANNEXURES - I & II                            | 16-23    |

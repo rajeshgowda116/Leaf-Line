@@ -1,0 +1,49 @@
+Here is the extracted agricultural text from the document page in clean, clear English markdown:
+
+# IPM PACKAGE FOR BRINJAL
+
+**I. MAJOR PESTS**
+
+**A. Pests of National Significance**
+
+1.  **Insect Pests**
+    1.1 Jassids
+    1.2 Shoot and fruit borer
+    1.3 Aphid
+    1.4 White fly
+
+2.  **Diseases**
+    2.1 Damping off
+    2.2 Phomopsis blight
+    2.3 Little leaf of brinjal
+    2.4 Bacterial Wilt
+
+3.  **Nematode**
+    3.1 Root-Knot nematode
+
+4.  **Weeds**
+    4.1 Lamb square (*Chenopodium album*)
+    4.2 Pimpernel (*Anagallis arvensis*)
+    4.3 Sweet clover (*Melilotus spp.*)
+    4.4 Fumitory (*Fumaria indica*)
+    4.5 Cornsparry (*Spergula arvensis*)
+    4.6 Blue grass (*Poa annua*)
+    4.7 Canary grass (*Phalaris minor*)
+    4.8 Rabit foot grass (*Dactyloctenium aegyptium*)
+
+**B. Pests of Regional Significance**
+
+1.  **Insect Pests**
+    1.1 Plume moth
+    1.2 Bud worm
+    1.3 Gall midge
+    1.4 Mealy bug
+    1.5 Leaf roller
+    1.6 Leaf webbing caterpillar
+    1.7 Termites
+    1.8 Grey weevil
+    1.9 Spider mites
+
+---
+2-458/PPQ&S/2002
+1

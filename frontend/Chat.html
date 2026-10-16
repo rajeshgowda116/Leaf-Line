@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeafLine Agritech AI - Disease Detection & Agronomist Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #edf5ee;
+            background-image: radial-gradient(circle at top right, rgba(22, 163, 74, 0.08) 0%, transparent 45%), 
+                              radial-gradient(circle at bottom left, rgba(22, 163, 74, 0.08) 0%, transparent 45%);
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased font-sans h-screen flex flex-col p-3 md:p-4 overflow-hidden">
+
+    <!-- Top Navbar -->
+    <header class="bg-white rounded-2xl shadow-sm py-2.5 px-4 md:px-6 flex flex-wrap items-center justify-between mb-3 shrink-0 border border-gray-100">
+        <!-- Logo & Branding -->
+        <a href="/" class="flex items-center space-x-2.5">
+            <div class="w-10 h-10 bg-brand-50 border border-brand-200 rounded-xl flex items-center justify-center text-brand-600 text-xl shadow-sm">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-lg leading-tight text-gray-900 tracking-tight flex items-center gap-1.5">
+                    <span>LeafLine</span>
+                    <span class="text-xs font-semibold px-2 py-0.5 bg-brand-100 text-brand-800 rounded-full border border-brand-200">AI Agronomist</span>
+                </h1>
+                <p class="text-[11px] text-gray-500 font-medium">Plant Pathology & Grounded RAG Knowledge Base</p>
+            </div>
+        </a>
+        
+        <!-- Navigation Links -->
+        <nav class="hidden lg:flex items-center space-x-2 bg-gray-50/90 p-1 rounded-full border border-gray-100">
+            <a href="/" class="flex items-center space-x-2 text-gray-600 hover:bg-gray-100 px-4 py-1.5 rounded-full text-xs font-medium transition">
+                <i class="fa-solid fa-house"></i><span>Home</span>
+            </a>
+            <a href="/roadmap?crop=tomato" class="flex items-center space-x-2 text-gray-600 hover:bg-gray-100 px-4 py-1.5 rounded-full text-xs font-medium transition">
+                <i class="fa-solid fa-route text-brand-600"></i><span>Crop Roadmap</span>
+            </a>
+            <a href="/chat" class="flex items-center space-x-2 bg-brand-100 text-brand-800 px-4 py-1.5 rounded-full text-xs font-semibold shadow-xs">
+                <i class="fa-solid fa-comment-dots"></i><span>Doctor & Agronomist Chat</span>
+            </a>
+        </nav>
+
+        <!-- Live Status Indicators & Mobile Menu Button -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+            <div id="rag-status-badge" class="hidden sm:flex items-center space-x-1.5 text-xs text-brand-800 bg-brand-50 px-3 py-1.5 rounded-full border border-brand-200">
+                <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                <span id="rag-status-text" class="font-medium">RAG Ready (406 Chunks)</span>
+            </div>
+            <div class="hidden sm:flex items-center space-x-2">
+                <div class="w-8 h-8 bg-brand-800 text-white rounded-full flex items-center justify-center font-bold text-xs shadow-sm">
+                    <i class="fa-solid fa-user-check text-xs"></i>
+                </div>
+                <div class="hidden md:block text-left leading-none">
+                    <span class="font-bold text-xs text-gray-800 block">Kisan / Grower</span>
+                    <span class="text-[10px] text-gray-400">Verified Access</span>
+                </div>
+            </div>
+            <button id="chat-mobile-menu-btn" type="button" class="lg:hidden w-9 h-9 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center hover:bg-gray-200 transition focus:outline-none" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars text-base" id="chat-mobile-menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Drawer -->
+        <div id="chat-mobile-menu-drawer" class="hidden lg:hidden w-full pt-3 pb-1 border-t border-gray-100 transition-all duration-200">
+            <nav class="flex flex-col gap-1.5">
+                <a href="/" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-gray-700 hover:bg-brand-50 hover:text-brand-800 transition">
+                    <i class="fa-solid fa-house w-5 text-center text-gray-500"></i>
+                    <span>Home Page</span>
+                </a>
+                <a href="/chat" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-100 text-brand-800">
+                    <i class="fa-solid fa-comment-dots w-5 text-center text-brand-600"></i>
+                    <span>Doctor & Agronomist Chat</span>
+                </a>
+                <a href="/roadmap?crop=tomato" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-gray-700 hover:bg-brand-50 hover:text-brand-800 transition">
+                    <i class="fa-solid fa-seedling w-5 text-center text-brand-600"></i>
+                    <span>Crop Growth Roadmap</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex gap-3 md:gap-4 flex-1 min-h-0">
+        
+        <!-- Left Sidebar (Desktop) -->
+        <aside class="w-56 flex flex-col justify-between shrink-0 h-full overflow-y-auto hidden md:flex pb-2">
+            <div class="space-y-4">
+                <nav class="space-y-1">
+                    <a href="/" class="flex items-center space-x-3 px-3.5 py-2.5 text-gray-700 hover:bg-white rounded-xl text-sm font-medium transition">
+                        <i class="fa-solid fa-house w-5 text-center text-gray-400"></i><span>Home Page</span>
+                    </a>
+                    <a href="/chat" class="flex items-center space-x-3 px-3.5 py-2.5 bg-white text-brand-700 rounded-xl text-sm font-semibold transition border border-brand-200 shadow-xs">
+                        <i class="fa-solid fa-comment-dots w-5 text-center text-brand-600"></i><span>Plant Chat</span>
+                    </a>
+                    <a href="/roadmap?crop=tomato" class="flex items-center space-x-3 px-3.5 py-2.5 text-gray-700 hover:bg-white rounded-xl text-sm font-medium transition">
+                        <i class="fa-solid fa-seedling w-5 text-center text-gray-400"></i><span>Crop Roadmap</span>
+                    </a>
+                </nav>
+
+                <!-- Knowledge Base Info Box -->
+                <div class="bg-white/90 p-4 rounded-2xl shadow-sm border border-brand-100 text-xs text-gray-600 space-y-2.5">
+                    <div class="flex items-center space-x-2 text-brand-800 font-bold">
+                        <i class="fa-solid fa-book-bookmark text-brand-600 text-sm"></i>
+                        <span>Agritech Guidebooks</span>
+                    </div>
+                    <p class="text-[11px] leading-relaxed text-gray-500">
+                        Indexed official agricultural research manuals from ICAR, TNAU Agritech, and Pathology Handbooks.
+                    </p>
+                    <div class="space-y-1 pt-1 text-[11px] font-medium text-gray-700 border-t border-gray-100">
+                        <div class="flex justify-between items-center">
+                            <span>🍅 Tomato Guides</span>
+                            <span class="text-green-700 font-bold">Indexed</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🌶️ Chilli & Capsicum</span>
+                            <span class="text-green-700 font-bold">Indexed</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🍆 Brinjal Pathology</span>
+                            <span class="text-green-700 font-bold">Indexed</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🌿 Okra / Bhindi</span>
+                            <span class="text-green-700 font-bold">Indexed</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🥒 Cucurbits & Gourds</span>
+                            <span class="text-green-700 font-bold">Indexed</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🌱 French Beans & Cowpea</span>
+                            <span class="text-green-700 font-bold">Indexed</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🥬 Spinach & Greens</span>
+                            <span class="text-green-700 font-bold">Indexed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer Card -->
+            <div class="bg-amber-50/70 p-3 rounded-xl border border-amber-200 text-[10px] text-amber-900 leading-tight">
+                <i class="fa-solid fa-shield-halved text-amber-700 mr-1"></i>
+                Base all chemical applications on label directions and consult local KVK agricultural extension experts.
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="flex-1 bg-white rounded-2xl shadow-sm flex flex-col overflow-hidden border border-gray-100">
+            <!-- Chat Header -->
+            <div class="px-5 py-3.5 border-b border-gray-100 flex justify-between items-center bg-white z-10 shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-700 text-lg shadow-xs">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-gray-900 flex items-center space-x-2 text-sm md:text-base">
+                            <span>LeafLine Agronomist Assistant</span>
+                            <div class="relative inline-flex items-center">
+                                <select id="active-crop-badge" class="bg-brand-50 hover:bg-brand-100 text-brand-900 text-xs pl-2.5 pr-6 py-0.5 rounded-full font-semibold border border-brand-200 cursor-pointer outline-none transition appearance-none shadow-2xs">
+                                    <option value="tomato">🍅 Tomato</option>
+                                    <option value="chilli">🌶️ Chilli</option>
+                                    <option value="brinjal">🍆 Brinjal</option>
+                                    <option value="okra">🌿 Okra / Bhindi</option>
+                                    <option value="cucurbits">🥒 Cucurbits</option>
+                                    <option value="beans">🌱 Beans</option>
+                                    <option value="spinach">🥬 Spinach</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down text-[9px] text-brand-700 absolute right-2 pointer-events-none"></i>
+                            </div>
+                        </h2>
+                        <p class="text-xs text-gray-500">Multimodal Leaf Vision Diagnosis & Grounded Agronomic RAG</p>
+                    </div>
+                </div>
+                <button id="clear-chat-btn" class="flex items-center space-x-1.5 text-xs text-gray-600 bg-gray-50 hover:bg-gray-100 px-3 py-1.5 rounded-lg border border-gray-200 transition">
+                    <i class="fa-solid fa-trash-can text-gray-400"></i><span>Clear</span>
+                </button>
+            </div>
+
+            <!-- Chat Messages Container -->
+            <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-5 custom-scrollbar bg-gray-50/40">
+                
+                <!-- Welcome Bot Message -->
+                <div class="flex items-start space-x-3 animate-fade-in">
+                    <div class="w-8 h-8 bg-brand-600 text-white rounded-full flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                        <i class="fa-solid fa-seedling text-sm"></i>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-5 max-w-2xl shadow-xs space-y-3">
+                        <div>
+                            <h3 class="font-bold text-base text-gray-900 flex items-center gap-2">
+                                <span>Namaste & Welcome to LeafLine AI!</span>
+                                <span>🌿</span>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mt-1">
+                                I am your <strong>Senior AI Agronomist and Crop Doctor</strong>, powered by Google Gemini Vision and a verified <strong>Retrieval-Augmented Generation (RAG)</strong> knowledge base of agricultural research guidebooks.
+                            </p>
+                        </div>
+
+                        <!-- Two Pillars -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                            <div class="bg-brand-50/70 p-3 rounded-xl border border-brand-200">
+                                <div class="font-bold text-brand-900 flex items-center gap-1.5 mb-1">
+                                    <i class="fa-solid fa-camera text-brand-600"></i>
+                                    <span>Leaf Photo Diagnosis</span>
+                                </div>
+                                <p class="text-gray-600 text-[11px] leading-relaxed">
+                                    Upload a leaf photograph. The vision engine detects early symptoms, identifies disease pathogens, and flags healthy leaves.
+                                </p>
+                            </div>
+                            <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-200">
+                                <div class="font-bold text-blue-900 flex items-center gap-1.5 mb-1">
+                                    <i class="fa-solid fa-book-open-reader text-blue-600"></i>
+                                    <span>Agronomist RAG Advisory</span>
+                                </div>
+                                <p class="text-gray-600 text-[11px] leading-relaxed">
+                                    Ask any question on organic remedies, chemical dosages, spray intervals, or preventive practices grounded strictly in agricultural manuals.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Sample Quick Questions to Try -->
+                        <div class="pt-2 border-t border-gray-100">
+                            <p class="text-xs font-semibold text-gray-700 mb-2">Try asking the Agronomist right now:</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="quickAskRAG('How to manage early blight in tomato using organic remedies?')" class="text-[11px] bg-gray-50 hover:bg-brand-50 hover:text-brand-800 hover:border-brand-300 text-gray-700 border border-gray-200 px-2.5 py-1 rounded-lg transition text-left">
+                                    🍅 Early blight organic cure
+                                </button>
+                                <button onclick="quickAskRAG('What is the chemical spray and dosage for brinjal fruit and shoot borer?')" class="text-[11px] bg-gray-50 hover:bg-brand-50 hover:text-brand-800 hover:border-brand-300 text-gray-700 border border-gray-200 px-2.5 py-1 rounded-lg transition text-left">
+                                    🍆 Brinjal shoot borer dosage
+                                </button>
+                                <button onclick="quickAskRAG('How to prevent yellow vein mosaic virus in okra through cultural practices?')" class="text-[11px] bg-gray-50 hover:bg-brand-50 hover:text-brand-800 hover:border-brand-300 text-gray-700 border border-gray-200 px-2.5 py-1 rounded-lg transition text-left">
+                                    🌿 Okra yellow vein mosaic prevention
+                                </button>
+                                <button onclick="quickAskRAG('What are the symptoms and cure for powdery mildew in cucurbits?')" class="text-[11px] bg-gray-50 hover:bg-brand-50 hover:text-brand-800 hover:border-brand-300 text-gray-700 border border-gray-200 px-2.5 py-1 rounded-lg transition text-left">
+                                    🥒 Cucurbit powdery mildew cure
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Input Area Footer -->
+            <div class="p-3 md:p-4 bg-white border-t border-gray-100 shrink-0 z-10">
+                <!-- Suggestion Chips -->
+                <div class="flex items-center space-x-2 mb-2.5 overflow-x-auto pb-1 custom-scrollbar">
+                    <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider whitespace-nowrap">Shortcuts:</span>
+                    <button id="quick-upload-btn" class="whitespace-nowrap px-3 py-1 rounded-full border border-brand-300 text-brand-800 text-xs font-semibold bg-brand-50 hover:bg-brand-100 transition flex items-center space-x-1.5 shadow-2xs">
+                        <i class="fa-solid fa-cloud-arrow-up text-brand-600"></i><span>Upload Leaf Photo</span>
+                    </button>
+                    <button onclick="quickAskRAG('What are the best organic and biological bio-controls for this crop?')" class="whitespace-nowrap px-3 py-1 rounded-full border border-gray-200 text-gray-700 text-xs font-medium bg-white hover:bg-gray-50 transition">
+                        🍃 Organic Bio-Controls
+                    </button>
+                    <button onclick="quickAskRAG('What preventive cultural practices and crop hygiene should I follow?')" class="whitespace-nowrap px-3 py-1 rounded-full border border-gray-200 text-gray-700 text-xs font-medium bg-white hover:bg-gray-50 transition">
+                        🛡️ Preventive Schedule
+                    </button>
+                    <button onclick="quickAskRAG('What is the recommended package of practices and fertilizer application for this crop?')" class="whitespace-nowrap px-3 py-1 rounded-full border border-gray-200 text-gray-700 text-xs font-medium bg-white hover:bg-gray-50 transition">
+                        🌾 Package of Practices
+                    </button>
+                </div>
+                
+                <!-- Input Box -->
+                <div class="flex items-center bg-gray-50 border border-gray-200 rounded-full px-2 py-1 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-100 transition shadow-xs">
+                    <!-- Hidden File Input -->
+                    <input type="file" id="leaf-image-input" accept="image/jpeg,image/png,image/webp" class="hidden">
+                    
+                    <button id="upload-paperclip-btn" title="Upload crop leaf photograph for disease diagnosis" class="w-9 h-9 flex items-center justify-center text-brand-600 hover:text-brand-800 hover:bg-brand-50 rounded-full transition">
+                        <i class="fa-solid fa-paperclip text-base"></i>
+                    </button>
+                    <input type="text" id="chat-text-input" placeholder="Ask any agronomy question (e.g., 'How to treat early blight?'), or attach a leaf photo..." class="flex-1 bg-transparent border-none outline-none px-3 text-xs md:text-sm text-gray-700 placeholder-gray-400">
+                    <button id="send-btn" title="Send question to Agronomist" class="w-9 h-9 bg-brand-700 hover:bg-brand-800 text-white rounded-full flex items-center justify-center shadow-sm transition">
+                        <i class="fa-solid fa-paper-plane text-xs -ml-0.5"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- JavaScript Connecting Frontend to Backend RAG & Vision -->
+    <script>
+        // State
+        let currentCrop = 'tomato';
+        const API_BASE = window.location.origin.startsWith('http') ? window.location.origin : 'http://localhost:8000';
+
+        const cropMeta = {
+            tomato: { name: 'Tomato', emoji: '🍅' },
+            chilli: { name: 'Chilli', emoji: '🌶️' },
+            brinjal: { name: 'Brinjal', emoji: '🍆' },
+            okra: { name: "Okra / Bhindi", emoji: '🌿' },
+            cucurbits: { name: 'Cucurbits / Gourds', emoji: '🥒' },
+            beans: { name: 'Beans', emoji: '🌱' },
+            spinach: { name: 'Spinach', emoji: '🥬' }
+        };
+
+        // Initialize from URL parameters (e.g. ?crop=chilli)
+        const params = new URLSearchParams(window.location.search);
+        const cropParam = params.get('crop');
+        if (cropParam && cropMeta[cropParam.toLowerCase()]) {
+            currentCrop = cropParam.toLowerCase();
+        }
+
+        // DOM elements
+        const chatContainer = document.getElementById('chat-messages-container');
+        const fileInput = document.getElementById('leaf-image-input');
+        const paperclipBtn = document.getElementById('upload-paperclip-btn');
+        const quickUploadBtn = document.getElementById('quick-upload-btn');
+        const sendBtn = document.getElementById('send-btn');
+        const textInput = document.getElementById('chat-text-input');
+        const clearBtn = document.getElementById('clear-chat-btn');
+        const activeCropBadge = document.getElementById('active-crop-badge');
+        const ragStatusText = document.getElementById('rag-status-text');
+
+        const conversationHistory = [];
+
+        function updateCropUI() {
+            const meta = cropMeta[currentCrop] || { name: currentCrop, emoji: '🌱' };
+            if (activeCropBadge) {
+                if (activeCropBadge.tagName === 'SELECT') {
+                    activeCropBadge.value = currentCrop;
+                } else {
+                    activeCropBadge.textContent = `${meta.emoji} ${meta.name} Selected`;
+                }
+            }
+
+            document.querySelectorAll('.crop-select-btn').forEach(btn => {
+                const c = btn.getAttribute('data-crop');
+                if (c === currentCrop) {
+                    btn.className = 'crop-select-btn flex items-center space-x-2 bg-brand-50 border-2 border-brand-500 py-1.5 px-2.5 rounded-xl shadow-xs transition font-semibold text-left';
+                } else {
+                    btn.className = 'crop-select-btn flex items-center space-x-2 bg-gray-50 border border-gray-200 py-1.5 px-2.5 rounded-xl hover:bg-gray-100 transition font-medium text-left';
+                }
+            });
+        }
+
+        if (activeCropBadge && activeCropBadge.tagName === 'SELECT') {
+            activeCropBadge.addEventListener('change', (e) => {
+                currentCrop = e.target.value;
+                updateCropUI();
+            });
+        }
+
+        // Crop Selection Listeners (if any exist)
+        document.querySelectorAll('.crop-select-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentCrop = btn.getAttribute('data-crop');
+                updateCropUI();
+            });
+        });
+
+        // Trigger File Upload
+        paperclipBtn.addEventListener('click', () => fileInput.click());
+        quickUploadBtn.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            await processUploadedFile(file);
+            fileInput.value = '';
+        });
+
+        // Send Button / Enter key
+        sendBtn.addEventListener('click', async () => {
+            const text = textInput.value.trim();
+            if (text) {
+                addUserTextMessage(text);
+                textInput.value = '';
+                await askAgronomistRAG(text);
+            } else {
+                fileInput.click();
+            }
+        });
+
+        textInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            chatContainer.innerHTML = '';
+            conversationHistory.length = 0;
+            addBotTextMessage(`Chat history cleared. Select your crop, ask any agronomic question, or upload a leaf photo to begin.`);
+        });
+
+        // Quick Ask Helper for Buttons
+        async function quickAskRAG(questionText) {
+            addUserTextMessage(questionText);
+            await askAgronomistRAG(questionText);
+        }
+
+        // -------------------------------------------------------------
+        // Core RAG Query Execution
+        // -------------------------------------------------------------
+        async function askAgronomistRAG(question, cropOverride = null) {
+            showRAGLoadingIndicator();
+            const targetCrop = cropOverride || currentCrop;
+
+            try {
+                const resp = await fetch(`${API_BASE}/api/v1/rag/ask`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question: question,
+                        crop: targetCrop,
+                        history: conversationHistory.slice(-6)
+                    })
+                });
+
+                removeLoadingIndicator();
+
+                if (!resp.ok) {
+                    const err = await resp.json().catch(() => ({ detail: 'Failed to retrieve advice from agricultural knowledge base.' }));
+                    addBotTextMessage(`<span class="text-red-600 font-semibold"><i class="fa-solid fa-circle-exclamation mr-1.5"></i>Error:</span> ${err.detail}`);
+                    return;
+                }
+
+                const data = await resp.json();
+                renderRAGAnswerCard(data, question);
+
+                conversationHistory.push({
+                    question: question,
+                    answer: data.answer || ''
+                });
+            } catch (err) {
+                removeLoadingIndicator();
+                addBotTextMessage(`<span class="text-red-600 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1.5"></i>Connection Error:</span> Could not connect to LeafLine Agronomist server.`);
+            }
+        }
+
+        function showRAGLoadingIndicator() {
+            const indicatorHtml = `
+                <div id="loading-card" class="flex items-start space-x-3 animate-fade-in">
+                    <div class="w-8 h-8 bg-brand-100 text-brand-700 rounded-full flex items-center justify-center shrink-0 shadow-xs mt-1 animate-pulse">
+                        <i class="fa-solid fa-book-open-reader text-sm"></i>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-3.5 shadow-xs flex items-center space-x-3 text-xs sm:text-sm text-gray-700">
+                        <i class="fa-solid fa-circle-notch fa-spin text-brand-600 text-lg"></i>
+                        <div>
+                            <p class="font-bold text-gray-900">Generating...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', indicatorHtml);
+            scrollToBottom();
+        }
+
+        function showLoadingIndicator() {
+            const indicatorHtml = `
+                <div id="loading-card" class="flex items-start space-x-3 animate-fade-in">
+                    <div class="w-8 h-8 bg-brand-100 text-brand-700 rounded-full flex items-center justify-center shrink-0 shadow-xs mt-1 animate-pulse">
+                        <i class="fa-solid fa-microscope text-sm"></i>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-3.5 shadow-xs flex items-center space-x-3 text-xs sm:text-sm text-gray-700">
+                        <i class="fa-solid fa-circle-notch fa-spin text-brand-600 text-lg"></i>
+                        <div>
+                            <p class="font-bold text-gray-900">Generating...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', indicatorHtml);
+            scrollToBottom();
+        }
+
+        function removeLoadingIndicator() {
+            const el = document.getElementById('loading-card');
+            if (el) el.remove();
+        }
+
+        function formatMarkdownText(md) {
+            if (!md) return '';
+            let html = escapeHtml(md);
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h4 class="font-bold text-xs sm:text-sm text-gray-900 mt-2.5 mb-1 flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-brand-600 text-xs"></i><span>$1</span></h4>');
+            html = html.replace(/^## (.*$)/gim, '<h3 class="font-extrabold text-sm sm:text-base text-brand-900 mt-3.5 mb-1.5 border-b border-brand-100 pb-1">$1</h3>');
+            html = html.replace(/^# (.*$)/gim, '<h2 class="font-extrabold text-base sm:text-lg text-brand-800 mt-4 mb-2">$1</h2>');
+            // Bold & Italics
+            html = html.replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold text-gray-900">$1</strong>');
+            html = html.replace(/\*(.*?)\*/gim, '<em class="italic text-gray-700">$1</em>');
+            // Blockquotes
+            html = html.replace(/^&gt; (.*$)/gim, '<blockquote class="border-l-3 border-amber-400 bg-amber-50/70 p-2 rounded-r-lg my-2 text-xs text-amber-900">$1</blockquote>');
+            // Lists
+            html = html.replace(/^\* (.*$)/gim, '<li class="ml-4 list-disc text-xs text-gray-700 my-0.5">$1</li>');
+            html = html.replace(/^- (.*$)/gim, '<li class="ml-4 list-disc text-xs text-gray-700 my-0.5">$1</li>');
+            // Line breaks
+            html = html.replace(/\n\n/g, '<div class="h-2"></div>');
+            html = html.replace(/\n/g, '<br>');
+            return html;
+        }
+
+        // Render RAG Agronomist Answer Card
+        function renderRAGAnswerCard(data, userQuery) {
+            const time = getCurrentTime();
+            const answerHtml = formatMarkdownText(data.answer);
+            const sources = data.sources || [];
+            const cropTitle = data.crop || currentCrop;
+            const categoryTag = data.category || 'Agronomic Advisory';
+
+            const cardId = 'rag-card-' + Date.now();
+            const cardHtml = `
+                <div class="flex items-start space-x-3 animate-fade-in" id="${cardId}">
+                    <div class="w-8 h-8 bg-brand-600 text-white rounded-full flex items-center justify-center shrink-0 shadow-sm mt-1">
+                        <i class="fa-solid fa-user-doctor text-sm"></i>
+                    </div>
+                    <div class="bg-white border border-brand-200 rounded-2xl rounded-tl-none p-4 md:p-5 max-w-3xl shadow-xs w-full space-y-3">
+                        <!-- Card Header -->
+                        <div class="flex flex-wrap items-center justify-between border-b border-brand-100 pb-2.5 gap-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-brand-900 bg-brand-50 px-2.5 py-0.5 rounded-full border border-brand-200 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-leaf text-brand-600"></i>
+                                    <span>LeafLine Agronomist Advice</span>
+                                </span>
+                                <span class="text-[11px] text-gray-600 bg-gray-100 px-2 py-0.5 rounded-md font-medium">${escapeHtml(cropTitle)}</span>
+                                <span class="text-[10px] text-brand-700 bg-brand-100/60 px-2 py-0.5 rounded-md font-medium hidden sm:inline-block">${escapeHtml(categoryTag)}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="copyAdviceText('${cardId}')" class="text-gray-400 hover:text-brand-700 text-xs px-2 py-1 rounded hover:bg-gray-50 transition" title="Copy advice">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <span class="text-xs text-gray-400">${time}</span>
+                            </div>
+                        </div>
+
+                        <!-- Content Body -->
+                        <div class="advice-content text-xs sm:text-sm text-gray-800 leading-relaxed space-y-2">
+                            ${answerHtml}
+                        </div>
+
+                        <!-- Follow-up Quick Action Chips -->
+                        <div class="pt-2.5 border-t border-gray-100 flex flex-wrap items-center gap-1.5 text-xs">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase mr-1">Ask Follow-up:</span>
+                            <button onclick="quickAskRAG('What is the exact spray dosage and application timing?')" class="text-[11px] bg-gray-50 hover:bg-brand-50 hover:text-brand-800 text-gray-600 px-2.5 py-0.5 rounded-full border border-gray-200 transition">
+                                🧪 Spray Dosage & Timing
+                            </button>
+                            <button onclick="quickAskRAG('Are there biological controls like Trichoderma or neem formulations for this?')" class="text-[11px] bg-gray-50 hover:bg-brand-50 hover:text-brand-800 text-gray-600 px-2.5 py-0.5 rounded-full border border-gray-200 transition">
+                                🍃 Biological / Neem Options
+                            </button>
+                            <button onclick="quickAskRAG('What crop rotation and cultural practices prevent this from recurring?')" class="text-[11px] bg-gray-50 hover:bg-brand-50 hover:text-brand-800 text-gray-600 px-2.5 py-0.5 rounded-full border border-gray-200 transition">
+                                🔄 Crop Rotation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', cardHtml);
+            scrollToBottom();
+        }
+
+        // Copy Advice Helper
+        function copyAdviceText(cardId) {
+            const card = document.getElementById(cardId);
+            if (!card) return;
+            const content = card.querySelector('.advice-content').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('Agronomist advice copied to clipboard!');
+            }).catch(() => {});
+        }
+
+        // -------------------------------------------------------------
+        // Core Multimodal Leaf Vision Execution
+        // -------------------------------------------------------------
+        async function processUploadedFile(file) {
+            // Client-side 5 MB file size limit check
+            const MAX_SIZE = 5 * 1024 * 1024;
+            if (file.size > MAX_SIZE) {
+                const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+                addBotTextMessage(`<div class="p-3.5 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-xs space-y-1">
+                    <div class="font-bold flex items-center space-x-1.5">
+                        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+                        <span>File Exceeds 5 MB Limit</span>
+                    </div>
+                    <p>The selected image (${sizeMb} MB) exceeds the maximum allowed file size of 5 MB. Please upload a smaller image file.</p>
+                </div>`);
+                return;
+            }
+
+            if (!file.type.startsWith('image/')) {
+                addBotTextMessage(`<div class="p-3.5 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-xs space-y-1">
+                    <div class="font-bold flex items-center space-x-1.5">
+                        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+                        <span>Unsupported File Format</span>
+                    </div>
+                    <p>Please upload a valid image photograph (JPG, PNG, or WebP).</p>
+                </div>`);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const imgDataUrl = e.target.result;
+                const meta = cropMeta[currentCrop] || { name: currentCrop, emoji: '🌱' };
+                addUserMessage(imgDataUrl, `Diagnose ${meta.name} Leaf`);
+                showLoadingIndicator();
+
+                try {
+                    const formData = new FormData();
+                    formData.append('crop', currentCrop);
+                    formData.append('image', file);
+
+                    const resp = await fetch(`${API_BASE}/analyze-disease`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    removeLoadingIndicator();
+
+                    if (!resp.ok) {
+                        const err = await resp.json().catch(() => ({ detail: 'Analysis failed.' }));
+                        const isNonPlant = err.is_plant_visible === false;
+                        const errorTitle = isNonPlant ? "No Plant Detected" : "Diagnostic Notice";
+                        const errorMsg = err.detail || err.assessment || "Could not analyze the uploaded image.";
+
+                        addBotTextMessage(`
+                            <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-xs space-y-2">
+                                <div class="font-bold flex items-center space-x-1.5 text-rose-900">
+                                    <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
+                                    <span>${escapeHtml(errorTitle)}</span>
+                                </div>
+                                <p class="leading-relaxed">${escapeHtml(errorMsg)}</p>
+                                <button onclick="document.getElementById('leaf-image-input').click()" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-semibold text-[11px] transition shadow-2xs">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                    <span>Upload Another Leaf Photo</span>
+                                </button>
+                            </div>
+                        `);
+                        return;
+                    }
+
+                    const data = await resp.json();
+                    renderDiagnosisCard(data, imgDataUrl);
+                } catch (error) {
+                    removeLoadingIndicator();
+                    addBotTextMessage(`
+                        <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-xs space-y-2">
+                            <div class="font-bold flex items-center space-x-1.5 text-rose-900">
+                                <i class="fa-solid fa-wifi text-rose-600"></i>
+                                <span>Connection Error</span>
+                            </div>
+                            <p class="leading-relaxed">Could not reach the LeafLine AI backend server. Please verify your connection and retry.</p>
+                            <button onclick="document.getElementById('leaf-image-input').click()" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-semibold text-[11px] transition shadow-2xs">
+                                <i class="fa-solid fa-rotate-right"></i>
+                                <span>Retry Analysis</span>
+                            </button>
+                        </div>
+                    `);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Example Leaf Testing Simulator
+        async function simulateSample(crop, diseaseName) {
+            currentCrop = crop;
+            updateCropUI();
+
+            const sampleUrls = {
+                'Early Blight': 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=400&q=80',
+                'Healthy': 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80',
+                'Curl Virus': 'https://images.unsplash.com/photo-1588047910543-91185461159c?auto=format&fit=crop&w=400&q=80'
+            };
+
+            const imageUrl = sampleUrls[diseaseName] || sampleUrls['Early Blight'];
+            const meta = cropMeta[crop] || { name: crop, emoji: '🌱' };
+            addUserMessage(imageUrl, `Sample: ${meta.name} (${diseaseName})`);
+            showLoadingIndicator();
+
+            try {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                const file = new File([blob], `${crop}_sample.jpg`, { type: 'image/jpeg' });
+
+                const formData = new FormData();
+                formData.append('crop', crop);
+                formData.append('image', file);
+
+                const apiResp = await fetch(`${API_BASE}/analyze-disease`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                removeLoadingIndicator();
+
+                if (!apiResp.ok) {
+                    const err = await apiResp.json().catch(() => ({ detail: 'API error' }));
+                    addBotTextMessage(`<span class="text-red-600 font-semibold"><i class="fa-solid fa-circle-exclamation mr-1.5"></i>Error:</span> ${escapeHtml(err.detail || 'Analysis failed.')}`);
+                    return;
+                }
+
+                const data = await apiResp.json();
+                renderDiagnosisCard(data, imageUrl);
+            } catch (err) {
+                removeLoadingIndicator();
+                addBotTextMessage(`<span class="text-red-600 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1.5"></i>Network Error:</span> Could not fetch sample image or connect to backend.`);
+            }
+        }
+
+        // Render Gemini Multimodal Vision Diagnosis Card
+        function renderDiagnosisCard(data, imgUrl) {
+            const time = getCurrentTime();
+            const meta = cropMeta[data.crop] || { name: data.crop_name || data.crop, emoji: '🌱' };
+            const isHealthy = (data.disease_name || data.predicted_disease || '').toLowerCase().includes('healthy');
+            const guidance = data.treatment_guidance || {};
+            const verified = data.verified_treatment || {};
+
+            const symptomsList = (data.visible_symptoms || guidance.symptoms || []).map(s => `<li>${escapeHtml(s)}</li>`).join('');
+            const nonChemList = (verified.non_chemical_management || guidance.non_chemical_control || []).map(t => `<li>${escapeHtml(t)}</li>`).join('');
+            const chemicalList = (verified.treatment || guidance.verified_treatment || []).map(t => `<li>${escapeHtml(t)}</li>`).join('');
+            const preventionList = (verified.prevention || guidance.prevention || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+            const safetyList = (verified.safety_precautions || guidance.safety_precautions || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+
+            const badgeColor = isHealthy ? 'bg-green-50 text-green-700 border-green-200' : 'bg-red-50 text-red-700 border-red-200';
+            const badgeIcon = isHealthy ? 'fa-circle-check text-green-600' : 'fa-triangle-exclamation text-red-600';
+
+            const diseaseName = data.disease_name || data.predicted_disease || 'Condition Analyzed';
+            const isVerified = Boolean(verified.is_verified);
+            const verifiedPill = isVerified 
+                ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200"><i class="fa-solid fa-shield-halved mr-1"></i>VERIFIED ICAR/TNAU</span>'
+                : '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200"><i class="fa-solid fa-eye mr-1"></i>PRELIMINARY VISUAL</span>';
+
+            // Format Source Citations HTML
+            const sources = verified.source_references || [];
+            let sourcesHtml = '';
+            if (sources.length > 0) {
+                const links = sources.map(s => s.url 
+                    ? `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="underline hover:text-emerald-950 font-semibold">${escapeHtml(s.name)}</a>`
+                    : `<span>${escapeHtml(s.name)}</span>`
+                ).join(' • ');
+                sourcesHtml = `<div class="text-[11px] text-emerald-800 pt-1 border-t border-emerald-200/60 font-medium"><strong>Sources:</strong> ${links}</div>`;
+            }
+
+            const cardHtml = `
+                <div class="flex items-start space-x-3 animate-fade-in">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 shadow-xs mt-1">
+                        <i class="fa-solid fa-microscope text-sm"></i>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-4 md:p-5 max-w-3xl shadow-xs w-full space-y-4">
+                        
+                        <!-- Top Header & Visual Specimen -->
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <img src="${imgUrl}" alt="Analyzed leaf" class="w-full md:w-52 h-40 object-cover rounded-xl shadow-xs border border-gray-200 shrink-0">
+                            
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <span class="text-xl">${meta.emoji}</span>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500">${meta.name}</span>
+                                </div>
+                                <div class="flex flex-wrap items-center gap-2 mb-2">
+                                    <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">${escapeHtml(diseaseName)}</h3>
+                                    <span class="${badgeColor} text-xs font-bold px-2.5 py-0.5 rounded-md border flex items-center space-x-1">
+                                        <i class="fa-solid ${badgeIcon} mr-1"></i>
+                                        <span>${isHealthy ? 'Healthy Foliage' : 'Suspected Condition'}</span>
+                                    </span>
+                                    ${verifiedPill}
+                                </div>
+
+                                <div class="mb-2">
+                                    <span class="text-[10px] font-semibold uppercase tracking-wider text-brand-800 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">
+                                        <i class="fa-solid fa-sparkles mr-1"></i>DIAGNOSTIC ASSESSMENT
+                                    </span>
+                                </div>
+                                
+                                <p class="text-xs text-gray-700 leading-relaxed">
+                                    ${escapeHtml(data.assessment || data.overview || guidance.overview || 'Preliminary pathological visual assessment completed.')}
+                                </p>
+                                ${data.reasoning ? `<p class="text-[11px] text-gray-500 italic mt-1 leading-snug">Reasoning: ${escapeHtml(data.reasoning)}</p>` : ''}
+                            </div>
+                        </div>
+
+                        <!-- Info Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <!-- Visible Symptoms -->
+                            <div class="bg-red-50/50 border border-red-100 rounded-xl p-3.5">
+                                <h4 class="flex items-center space-x-1.5 text-red-800 font-bold text-xs mb-2">
+                                    <i class="fa-solid fa-virus text-red-600"></i><span>Visible Symptoms Observed</span>
+                                </h4>
+                                <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+                                    ${symptomsList || '<li>No visible lesions, spots, or foliar distress detected.</li>'}
+                                </ul>
+                            </div>
+                            
+                            <!-- Diagnostic Uncertainty & Caveats -->
+                            <div class="bg-amber-50/50 border border-amber-100 rounded-xl p-3.5">
+                                <h4 class="flex items-center space-x-1.5 text-amber-800 font-bold text-xs mb-2">
+                                    <i class="fa-solid fa-triangle-exclamation text-amber-600"></i><span>Diagnostic Uncertainty & Limitations</span>
+                                </h4>
+                                <p class="text-xs text-gray-700 leading-relaxed">
+                                    ${escapeHtml(data.uncertainty || 'Visual inspection cannot replace laboratory or microscopic pathogen testing.')}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Treatment & Management -->
+                        <div class="bg-emerald-50/50 border border-emerald-100 rounded-xl p-3.5 space-y-2">
+                            <h4 class="flex items-center space-x-1.5 text-emerald-900 font-bold text-xs mb-1">
+                                <i class="fa-solid fa-leaf text-emerald-600"></i><span>Verified Management & Remedies</span>
+                            </h4>
+                            ${nonChemList ? `
+                                <p class="text-[10px] font-bold text-gray-700 uppercase tracking-wider">Non-Chemical & Cultural Practices:</p>
+                                <ul class="text-xs text-gray-800 space-y-0.5 list-disc list-inside mb-2">${nonChemList}</ul>
+                            ` : ''}
+                            ${chemicalList ? `
+                                <p class="text-[10px] font-bold text-gray-700 uppercase tracking-wider">Reviewed Treatment Protocol:</p>
+                                <ul class="text-xs text-gray-800 space-y-0.5 list-disc list-inside">${chemicalList}</ul>
+                            ` : (isHealthy ? '<p class="text-xs text-gray-600">No chemical interventions required for healthy foliage.</p>' : '<p class="text-xs text-gray-600">No chemical treatments verified for this class. Practice crop hygiene and consult an agronomist.</p>')}
+                            ${sourcesHtml}
+                        </div>
+
+                        <!-- Prevention & Safety -->
+                        <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-3.5">
+                            <h4 class="flex items-center space-x-1.5 text-blue-800 font-bold text-xs mb-2">
+                                <i class="fa-solid fa-shield-check text-blue-600"></i><span>Prevention & Agronomic Field Care</span>
+                            </h4>
+                            <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                                ${preventionList || '<li>Practice standard crop hygiene and certified seed selection.</li>'}
+                            </ul>
+                            ${safetyList ? `
+                                <div class="mt-2.5 pt-2 border-t border-blue-200/60">
+                                    <p class="text-[10px] font-bold text-amber-800 uppercase tracking-wider mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Safety Advisory:</p>
+                                    <ul class="text-xs text-gray-700 space-y-0.5 list-disc list-inside">${safetyList}</ul>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <!-- Seamless Bridge to Agronomist RAG Knowledge Base -->
+                        <div class="bg-brand-50/80 border border-brand-200 rounded-xl p-3 space-y-2">
+                            <div class="flex items-center justify-between text-xs font-bold text-brand-900">
+                                <span class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-book-open-reader text-brand-700"></i>
+                                    <span>Query Agricultural Guides for ${escapeHtml(diseaseName)}:</span>
+                                </span>
+                                <span class="text-[10px] text-brand-700 font-normal">Grounded RAG answers</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="quickAskRAG('What are the organic remedies and bio-fungicides for ${escapeHtml(diseaseName)} in ${meta.name}?')" class="text-xs bg-white hover:bg-brand-100 text-brand-900 font-semibold px-2.5 py-1 rounded-lg border border-brand-300 transition shadow-2xs">
+                                    🍃 Ask Organic Treatment
+                                </button>
+                                <button onclick="quickAskRAG('What is the recommended chemical spray dosage and safety interval for ${escapeHtml(diseaseName)} in ${meta.name}?')" class="text-xs bg-white hover:bg-brand-100 text-brand-900 font-semibold px-2.5 py-1 rounded-lg border border-brand-300 transition shadow-2xs">
+                                    🧪 Ask Spray Dosage
+                                </button>
+                                <button onclick="quickAskRAG('What preventive cultural practices stop ${escapeHtml(diseaseName)} from recurring in ${meta.name}?')" class="text-xs bg-white hover:bg-brand-100 text-brand-900 font-semibold px-2.5 py-1 rounded-lg border border-brand-300 transition shadow-2xs">
+                                    🛡️ Ask Prevention Routine
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="flex justify-between items-center pt-2 border-t border-gray-100 text-xs text-gray-500">
+                            <span class="text-[11px] text-gray-400">Automated Leaf Pathology Analysis</span>
+                            <span class="text-[10px] text-gray-400">${time}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', cardHtml);
+            scrollToBottom();
+        }
+
+        // Standard Chat Bubble Helpers
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function addUserMessage(imgSrc, label) {
+            const time = getCurrentTime();
+            const msgHtml = `
+                <div class="flex justify-end animate-fade-in">
+                    <div class="bg-brand-100 rounded-2xl rounded-tr-none p-2.5 max-w-sm shadow-xs border border-brand-200">
+                        <div class="flex items-start space-x-2.5">
+                            <img src="${imgSrc}" alt="Uploaded leaf" class="w-20 h-14 object-cover rounded-lg border border-brand-300">
+                            <div class="flex flex-col justify-between h-14">
+                                <p class="text-xs text-gray-900 font-bold">${escapeHtml(label)}</p>
+                                <span class="text-[10px] text-brand-800 text-right w-full flex justify-end items-center">
+                                    ${time} <i class="fa-solid fa-check-double ml-1 text-brand-600"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', msgHtml);
+            scrollToBottom();
+        }
+
+        function addUserTextMessage(text) {
+            const time = getCurrentTime();
+            const msgHtml = `
+                <div class="flex justify-end animate-fade-in">
+                    <div class="bg-brand-100 rounded-2xl rounded-tr-none px-4 py-2 max-w-md shadow-xs border border-brand-200">
+                        <p class="text-xs sm:text-sm text-gray-900">${escapeHtml(text)}</p>
+                        <span class="text-[10px] text-brand-700 text-right block mt-0.5">${time}</span>
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', msgHtml);
+            scrollToBottom();
+        }
+
+        function addBotTextMessage(htmlContent) {
+            const msgHtml = `
+                <div class="flex items-start space-x-3 animate-fade-in">
+                    <div class="w-8 h-8 bg-brand-600 text-white rounded-full flex items-center justify-center shrink-0 shadow-xs mt-1">
+                        <i class="fa-solid fa-seedling text-sm"></i>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-3.5 max-w-xl shadow-xs text-xs sm:text-sm text-gray-700">
+                        ${htmlContent}
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', msgHtml);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, s => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[s]));
+        }
+
+        // Live Health Check on Load
+        async function checkSystemHealth() {
+            try {
+                const res = await fetch(`${API_BASE}/health`);
+                if (res.ok) {
+                    const health = await res.json();
+                    if (ragStatusText) {
+                        ragStatusText.textContent = `RAG Ready (${health.rag_indexed_chunks || 406} Chunks)`;
+                    }
+                }
+            } catch (e) {
+                if (ragStatusText) {
+                    ragStatusText.textContent = `Local Server`;
+                }
+            }
+        }
+
+        // Mobile Drawer Toggle
+        (function() {
+            const chatMobileBtn = document.getElementById('chat-mobile-menu-btn');
+            const chatMobileDrawer = document.getElementById('chat-mobile-menu-drawer');
+            const chatMobileIcon = document.getElementById('chat-mobile-menu-icon');
+
+            if (chatMobileBtn && chatMobileDrawer) {
+                chatMobileBtn.addEventListener('click', () => {
+                    const isHidden = chatMobileDrawer.classList.contains('hidden');
+                    if (isHidden) {
+                        chatMobileDrawer.classList.remove('hidden');
+                        chatMobileIcon.className = 'fa-solid fa-xmark text-base';
+                    } else {
+                        chatMobileDrawer.classList.add('hidden');
+                        chatMobileIcon.className = 'fa-solid fa-bars text-base';
+                    }
+                });
+            }
+        })();
+
+        // Initialize UI
+        updateCropUI();
+        checkSystemHealth();
+    </script>
+</body>
+</html>

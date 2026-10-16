@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeafLine AI — Intelligent Agronomist & Plant Disease Detection</title>
+  <meta name="description" content="LeafLine: AI-powered crop disease detection, multimodal leaf diagnostics, and evidence-grounded agronomic roadmaps.">
+  <meta name="theme-color" content="#16a34a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      background-image: radial-gradient(circle at top left, #edfbd8 0%, transparent 40%), radial-gradient(circle at bottom right, #f0fdf4 0%, transparent 40%);
+    }
+    .nav-pill-active {
+      background-color: #dcfce7 !important;
+      color: #166534 !important;
+      font-weight: 700 !important;
+    }
+    .nav-pill-idle {
+      color: #4b5563;
+    }
+    .nav-pill-idle:hover {
+      background-color: #f3f4f6;
+      color: #111827;
+    }
+  </style>
+</head>
+
+<body class="text-gray-800 antialiased font-sans min-h-screen flex flex-col justify-between selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Unified Top Navbar -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-2xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-3">
+        
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group shrink-0">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition duration-200">
+            <i class="fa-solid fa-leaf text-lg"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-extrabold text-xl sm:text-2xl text-gray-900 tracking-tight leading-none">LeafLine</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-brand-100 text-brand-800 border border-brand-200 hidden sm:inline-block">AI Agronomist</span>
+            </div>
+            <p class="text-[11px] text-gray-500 font-medium leading-tight mt-0.5">Crop Pathology & Grounded Growth Guides</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1.5 bg-gray-50/90 p-1.5 rounded-full border border-gray-200/70">
+          <a href="/" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-brand-100 text-brand-800 shadow-xs">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </a>
+          <a href="/chat" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold nav-pill-idle transition">
+            <i class="fa-solid fa-comment-dots text-brand-600"></i>
+            <span>Disease Chat & RAG</span>
+          </a>
+          <a href="/roadmap?crop=tomato" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold nav-pill-idle transition">
+            <i class="fa-solid fa-seedling text-brand-600"></i>
+            <span>Crop Roadmap</span>
+          </a>
+        </nav>
+
+        <!-- Diagnose CTA & Mobile Menu Button -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="/chat" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-xs transition">
+            <i class="fa-solid fa-leaf"></i>
+            <span>Diagnose Leaf</span>
+          </a>
+
+          <button id="mobile-menu-btn" type="button" class="md:hidden w-10 h-10 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center hover:bg-gray-200 transition focus:outline-none" aria-label="Toggle Menu">
+            <i class="fa-solid fa-bars text-lg" id="mobile-menu-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Drawer -->
+      <div id="mobile-menu-drawer" class="hidden md:hidden pb-4 pt-2 border-t border-gray-100 transition-all duration-200">
+        <nav class="flex flex-col gap-1.5">
+          <a href="/" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-bold bg-brand-50 text-brand-800">
+            <i class="fa-solid fa-house w-5 text-center text-brand-600"></i>
+            <span>Home Page</span>
+          </a>
+          <a href="/chat" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-brand-50 hover:text-brand-800 transition">
+            <i class="fa-solid fa-comment-dots w-5 text-center text-brand-600"></i>
+            <span>Disease Diagnosis & Chat</span>
+          </a>
+          <a href="/roadmap?crop=tomato" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-brand-50 hover:text-brand-800 transition">
+            <i class="fa-solid fa-seedling w-5 text-center text-brand-600"></i>
+            <span>Crop Growth Roadmap</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Left Content -->
+      <div>
+        <div
+          class="inline-flex items-center space-x-2 bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full text-sm font-semibold mb-6 shadow-sm border border-brand-100">
+          <i class="fa-solid fa-leaf"></i>
+          <span>AI-Powered Plant Disease Detection</span>
+        </div>
+
+        <h2 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-gray-900">
+          Detect <span class="text-brand-600">Vegetable</span><br>Diseases Easily
+        </h2>
+
+        <p class="text-lg text-gray-600 mb-10 max-w-lg">
+          Upload a leaf image and get instant AI-based disease detection, symptoms, and treatment suggestions for
+          healthier crops.
+        </p>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-bolt text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">AI Analysis</h4>
+            <p class="text-xs text-gray-500 mt-1">Accurate Detection</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-book-open text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">Expert Guidance</h4>
+            <p class="text-xs text-gray-500 mt-1">Treatment & Prevention</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-leaf text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">Multiple Crops</h4>
+            <p class="text-xs text-gray-500 mt-1">Support for 5+ Vegetables</p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <i class="fa-solid fa-shield-check text-xl"></i>
+            </div>
+            <h4 class="font-bold text-sm text-gray-900">Farmer Friendly</h4>
+            <p class="text-xs text-gray-500 mt-1">Simple and Easy to Use</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Tree Showcase Area -->
+      <div class="relative w-full rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-emerald-900 via-green-900 to-teal-950 p-2 sm:p-3 border border-emerald-800/40">
+        <!-- Main Featured Image Container -->
+        <div class="relative h-[440px] sm:h-[480px] w-full rounded-2xl overflow-hidden bg-emerald-950 group">
+          <!-- Main Hero Tree Image -->
+          <img id="main-tree-image"
+            src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80"
+            alt="Majestic Green Tree in Sunny Field"
+            class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80'">
+
+          <!-- Soft Aesthetic Gradient Overlay for clean readability -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none"></div>
+
+          <!-- Top Status Tag -->
+          <div class="absolute top-3.5 left-3.5 flex items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/95 text-emerald-900 backdrop-blur-md shadow-md border border-emerald-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <i class="fa-solid fa-tree text-emerald-600"></i> Healthy Tree Planting
+            </span>
+          </div>
+
+          <!-- Floating Inset Sapling Badge (Top Right) -->
+          <div class="absolute top-3.5 right-3.5 hidden sm:flex items-center gap-2 p-1.5 pr-3 bg-black/55 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg">
+            <img src="https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&w=300&q=80"
+              alt="Sapling in Soil"
+              class="w-10 h-10 rounded-xl object-cover border border-white/30">
+            <div>
+              <div class="text-[11px] font-bold text-white flex items-center gap-1">
+                <i class="fa-solid fa-seedling text-emerald-400"></i> Sapling Care
+              </div>
+              <div class="text-[10px] text-emerald-200 font-medium">ICAR & FAO Grounded</div>
+            </div>
+          </div>
+
+          <!-- Bottom Tree Feature Overlay -->
+          <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-xl border border-white/60">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+              <div>
+                <div class="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-700 tracking-wide uppercase">
+                  <i class="fa-solid fa-earth-americas"></i> Tree Planting & Agroforestry
+                </div>
+                <h3 class="font-black text-base sm:text-lg text-gray-900 leading-tight mt-0.5">
+                  Plant Trees, Build Green Future
+                </h3>
+                <p class="text-xs text-gray-600 mt-1 line-clamp-2">
+                  Learn soil pit preparation, root protection, and the 16-week watering schedule for healthy, long-life trees.
+                </p>
+              </div>
+
+              <!-- Quick Action Button to Tree Roadmap -->
+              <div class="shrink-0 flex items-center">
+                <a href="/roadmap?crop=tree_planting"
+                  class="w-full sm:w-auto py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-md hover:shadow-lg transform active:scale-95">
+                  <i class="fa-solid fa-book-open"></i>
+                  <span>Tree Guide</span>
+                  <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Interactive Tree Photo Thumbnails Switcher -->
+            <div class="pt-2.5 border-t border-gray-100 flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5">
+              <span class="text-[11px] font-bold text-gray-500 whitespace-nowrap flex items-center gap-1">
+                <i class="fa-solid fa-images text-emerald-600"></i> Gallery:
+              </span>
+              <div id="tree-gallery-btns" class="flex flex-wrap items-center gap-1.5">
+                <button type="button"
+                  onclick="selectTreePhoto(this, 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80', 'Majestic Mature Tree')"
+                  class="tree-gallery-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300 transition flex items-center gap-1">
+                  🌳 Big Tree
+                </button>
+                <button type="button"
+                  onclick="selectTreePhoto(this, 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&w=1200&q=80', 'Planting Sapling in Soil')"
+                  class="tree-gallery-btn px-2.5 py-1 rounded-lg text-[11px] font-medium bg-gray-50 text-gray-700 border border-gray-200 hover:bg-emerald-50 hover:text-emerald-900 transition flex items-center gap-1">
+                  🌱 Sapling
+                </button>
+                <button type="button"
+                  onclick="selectTreePhoto(this, 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80', 'Sunlit Forest Canopy')"
+                  class="tree-gallery-btn px-2.5 py-1 rounded-lg text-[11px] font-medium bg-gray-50 text-gray-700 border border-gray-200 hover:bg-emerald-50 hover:text-emerald-900 transition flex items-center gap-1">
+                  🌲 Forest
+                </button>
+                <button type="button"
+                  onclick="selectTreePhoto(this, 'https://images.unsplash.com/photo-1544077960-604201fe74bc?auto=format&fit=crop&w=1200&q=80', 'Fruit Orchard Tree')"
+                  class="tree-gallery-btn px-2.5 py-1 rounded-lg text-[11px] font-medium bg-gray-50 text-gray-700 border border-gray-200 hover:bg-emerald-50 hover:text-emerald-900 transition flex items-center gap-1">
+                  🍋 Fruit Tree
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Crop Selection Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 flex items-center justify-center space-x-3">
+        <i class="fa-solid fa-leaf text-brand-500 text-2xl transform -scale-x-100"></i>
+        <span>Select a <span class="text-brand-600">Vegetable</span> to Detect Disease</span>
+        <i class="fa-solid fa-leaf text-brand-500 text-2xl"></i>
+      </h2>
+      <p class="text-gray-600 mt-4 text-lg">Choose the crop you want to analyze. Upload a clear leaf image to get
+        instant results.</p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+      <!-- Tomato Card -->
+      <div
+        onclick="location.href=(location.protocol==='file:'?'RoadMap.html':'/roadmap')+'?crop=tomato'"
+        class="bg-red-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300 relative flex flex-col pt-2 cursor-pointer group border border-red-100">
+        <div class="px-2 overflow-hidden rounded-xl">
+          <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=400&q=80"
+            alt="Tomato" class="w-full h-40 object-cover rounded-xl group-hover:scale-105 transition duration-300">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-red-50">
+          🍅
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-1 group-hover:text-red-700 transition">Tomato</h3>
+          <p class="text-xs text-gray-500 mb-4 flex-grow leading-relaxed">
+            16-Week Day-by-Day Crop Growth Roadmap, Stage-by-Stage Nutrition & Disease Care.
+          </p>
+          <button
+            onclick="event.stopPropagation(); location.href=(location.protocol==='file:'?'RoadMap.html':'/roadmap')+'?crop=tomato'"
+            class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition shadow-xs text-sm">
+            <span>View Growth Roadmap</span> <i class="fa-solid fa-route ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chilli Card -->
+      <div
+        class="bg-emerald-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1588047910543-91185461159c?auto=format&fit=crop&w=400&q=80"
+            alt="Chilli" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-emerald-50">
+          🌶️
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Chilli</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Identify chilli leaf diseases such as Leaf Curl Virus, Bacterial Spot and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html':'/chat')+'?crop=chilli'"
+            class="bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Brinjal Card -->
+      <div
+        class="bg-purple-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1627913348123-b1dff39f506e?auto=format&fit=crop&w=400&q=80"
+            alt="Brinjal" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-purple-50">
+          🍆
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Brinjal</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Detect brinjal diseases like Cercospora Leaf Spot, Bacterial Wilt and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html':'/chat')+'?crop=brinjal'"
+            class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Ladies' Finger Card -->
+      <div
+        class="bg-green-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1598270570701-447e1136b85f?auto=format&fit=crop&w=400&q=80"
+            alt="Ladies Finger" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-green-50">
+          <i class="fa-solid fa-leaf text-green-600"></i>
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Ladies' Finger</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Identify okra diseases such as Yellow Vein Mosaic Virus, Leaf Spot and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html':'/chat')+'?crop=okra'"
+            class="bg-green-800 hover:bg-green-900 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cucumber Card -->
+      <div
+        class="bg-blue-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 relative flex flex-col pt-2">
+        <div class="px-2">
+          <img src="https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=400&q=80"
+            alt="Cucumber" class="w-full h-40 object-cover rounded-xl">
+        </div>
+        <div
+          class="absolute top-[140px] left-1/2 transform -translate-x-1/2 bg-white rounded-full p-2 shadow-sm w-12 h-12 flex items-center justify-center text-2xl border-4 border-blue-50">
+          🥒
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center flex-grow flex flex-col">
+          <h3 class="font-bold text-xl text-gray-900 mb-2">Cucumber</h3>
+          <p class="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+            Detect cucumber diseases like Powdery Mildew, Downy Mildew and more.
+          </p>
+          <button
+            onclick="location.href=(location.protocol==='file:'?'Chat.html':'/chat')+'?crop=cucumber'"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg w-full flex items-center justify-center transition">
+            Detect Disease <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Unified Agricultural Footer ─────────────────────────────────── -->
+  <footer class="bg-white border-t border-gray-200/80 py-8 px-4 sm:px-6 lg:px-8 mt-12 shrink-0">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white text-xs">
+          <i class="fa-solid fa-leaf"></i>
+        </div>
+        <span>© 2026 <strong>LeafLine AI</strong> — Trusted Crop Pathology & Agronomy</span>
+      </div>
+
+      <!-- Citations & Sources -->
+      <div class="flex flex-wrap items-center gap-4 text-[11px] text-gray-400">
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-building-columns text-emerald-600"></i> ICAR-IIHR Guidelines</span>
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-seedling text-brand-600"></i> TNAU Agritech Portal</span>
+        <a href="/roadmap?crop=tomato" class="hover:text-brand-700 font-semibold text-gray-500 transition">Tomato Roadmap</a>
+        <a href="/roadmap?crop=tree_planting" class="hover:text-brand-700 font-semibold text-gray-500 transition">🌳 Tree Planting Guide</a>
+        <a href="/chat" class="hover:text-brand-700 font-semibold text-gray-500 transition">Disease Chat</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Base Interactive Scripts -->
+  <script>
+    // Mobile Drawer Toggle
+    (function() {
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-menu-drawer');
+      const mobileIcon = document.getElementById('mobile-menu-icon');
+
+      if (mobileBtn && mobileDrawer) {
+        mobileBtn.addEventListener('click', () => {
+          const isHidden = mobileDrawer.classList.contains('hidden');
+          if (isHidden) {
+            mobileDrawer.classList.remove('hidden');
+            mobileIcon.className = 'fa-solid fa-xmark text-lg';
+          } else {
+            mobileDrawer.classList.add('hidden');
+            mobileIcon.className = 'fa-solid fa-bars text-lg';
+          }
+        });
+      }
+    })();
+
+    // Interactive Tree Photo Gallery Switcher
+    function selectTreePhoto(btn, imgUrl, altText) {
+      const mainImg = document.getElementById('main-tree-image');
+      if (mainImg) {
+        mainImg.style.opacity = '0.35';
+        setTimeout(() => {
+          mainImg.src = imgUrl;
+          mainImg.alt = altText || 'Tree Showcase';
+          mainImg.style.opacity = '1';
+        }, 160);
+      }
+
+      // Update button styling states
+      const allBtns = document.querySelectorAll('.tree-gallery-btn');
+      allBtns.forEach(b => {
+        b.className = 'tree-gallery-btn px-2.5 py-1 rounded-lg text-[11px] font-medium bg-gray-50 text-gray-700 border border-gray-200 hover:bg-emerald-50 hover:text-emerald-900 transition flex items-center gap-1';
+      });
+      if (btn) {
+        btn.className = 'tree-gallery-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300 transition flex items-center gap-1';
+      }
+    }
+  </script>
+
+</body>
+
+</html>
